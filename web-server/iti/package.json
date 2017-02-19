@@ -4,11 +4,13 @@
   "description": "Iti's website",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "forever": "forever"
   },
   "author": "Nils",
   "license": "Beerware",
   "dependencies": {
+    "forever": "^0.15.3",
     "pug": "^2.0.0-beta11"
   }
 }

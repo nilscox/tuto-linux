@@ -6,8 +6,8 @@ export PORT="4242"
 export SERVER_IFACE="0.0.0.0"
 
 case "$1" in
-  start) exec forever --sourceDir="$path" start index.js;;
-  stop) exec forever --sourceDir="$path" stop index.js;;
+  start) exec /usr/bin/sh -c 'cd "$path" && npm run forever -- --sourceDir="$path" start index.js';;
+  stop) exec /usr/bin/sh -c 'cd "$path" && npm run forever -- --sourceDir="$path" stop index.js';;
   *) echo "usage: $0 [start|stop]" 1>&2;;
 esac
 
