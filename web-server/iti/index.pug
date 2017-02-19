@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+    head
+        title Iti
+        link(href='/css/styles.css' type='text/css' rel='stylesheet')
+    body
+        #wrapper
+          div#text Hello, #{name}!
+          img(src='/images/iti.jpg')
+          form(action='/' method='GET')
+              input(type='text' name='name' placeholder='Your name' id='name')
+              input(type='submit' value='GO!' id='go')
+              div(style='clear: both')
