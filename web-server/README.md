@@ -59,11 +59,11 @@ les connexions vers l'autre serveur).
 
 Le serveur du site est écrit en utilisant [NodeJS](https://nodejs.org/en/), qui
 permet d'éxécuter du code JavaScript. Il est ainsi nécéssaire d'installer le
-paquet `node`. De plus, il faut installer les dépendances du projet avec `npm
-install` depuis le dossier `tuto-linux/web-server/iti`. Il est enfin possible
-de lancer le serveur, avec la commande `PORT=4242 node index.js` à partir du
-dossier du site. Si tout fonctionne correctement, le site doit être accessible
-sur `http://localhost:4242/`.
+paquet `node`. De plus, il faut installer les dépendances du projet avec la
+commande `npm install` depuis le dossier `tuto-linux/web-server/iti`. Il est
+enfin possible de lancer le serveur, avec la commande `PORT=4242 node index.js`
+à partir du dossier du site. Si tout fonctionne correctement, le site doit être
+accessible sur [http://localhost:4242/](http://localhost:4242/).
 
 Avoir une console ouverte pour que le site tourne en permanance, c'est pas
 pratique. Heureusement, il existe une commande qui permet de lancer un
@@ -72,15 +72,13 @@ programme en tant que démon ! Hmmm...
 Pour créer un nouveau démon (un nouveau service), il faut simplement créer un
 script dans le dossier `/etc/init.d/nom_du_service`. Le fichier
 `tuto-linux/web-server/iti/iti.service` peut être copié sous le nom `iti` pour
-créer un service qui va lancer node pour nous (il faut aussi installer un petit
-outil avec la commande `sudo npm install --save -g forever` pour que ça
-marche). Il est maintenant possible de lancer le site en tâche de fond avec une
-seule commande !
+créer un service qui va lancer node pour nous. Il est maintenant possible de
+lancer le site en tâche de fond avec une seule commande !
 
 Dernière étape : ajouter le site iti dans la configuration de nginx, pour que
-le site soit accessible sur `http://iti` en local (et donc ajouter le hostname
-`iti`). Encore une fois, la doc est relativement claire sur la configuration
-d'un *proxy server*.
+le site soit accessible sur [`http://iti/`](http://iti/) en local (et donc
+ajouter le hostname `iti`). Encore une fois, la doc est relativement claire sur
+la configuration d'un *proxy server*.
 
 ## Déploiement en prod
 
