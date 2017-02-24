@@ -1,14 +1,14 @@
-#!/bin/sh
+[Service]
+ExecStart=/usr/bin/nodejs /var/www/iti/index.js
+Restart=always
+StandardOutput=syslog
+SyslogIdentifier=iti-website
+User=root
+Group=root
+WorkingDirectory=/var/www/iti
+Environment=PATH=/usr/bin/:/usr/local/bin/
+Environment=NODE_ENV=production
+Environment=PORT=4242
 
-path="/home/nils/tuto-linux/web-server/iti"
-
-export PORT="4242"
-export SERVER_IFACE="0.0.0.0"
-
-case "$1" in
-  start) exec /usr/bin/sh -c 'cd "$path" && npm run forever -- --sourceDir="$path" start index.js';;
-  stop) exec /usr/bin/sh -c 'cd "$path" && npm run forever -- --sourceDir="$path" stop index.js';;
-  *) echo "usage: $0 [start|stop]" 1>&2;;
-esac
-
-exit 0
+[Install]
+WantedBy=multi-user.target
