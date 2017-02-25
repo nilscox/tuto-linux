@@ -17,7 +17,7 @@ française) des données, il existe deux méthodes : le chiffrage *symétrique*
 et... bah *asymétrique*. Dans le premier cas, il existe une clé (un mot de
 passe plus ou moins compliqué) permettant de chiffrer et de déchiffrer des
 données. C'est un peu comme un coffre fort : n'importe qui ayant la clé peut
-lire et écrire dans le coffre.
+accéder au coffre.
 
 Dans le cas du chiffrage asymétrique, il existe deux clées : une permettant
 uniquement le chiffrement (la clé publique) et la seconde permettant uniquement
