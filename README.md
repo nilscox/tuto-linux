@@ -8,6 +8,7 @@ ouvrant le capot qu'on peut comprendre comment ça marche.
 Tips :
 
 - [Git](/tips/git.md)
+- [SSH](/tips/ssh.md)
 
 Exos :
 
