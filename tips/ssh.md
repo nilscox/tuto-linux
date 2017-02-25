@@ -23,9 +23,12 @@ Dans le cas du chiffrage asymétrique, il existe deux clées : une permettant
 uniquement le chiffrement (la clé publique) et la seconde permettant uniquement
 le déchiffrement (la clé privée). La clé publique peut être distribuée
 librement à n'importe qui, de manière à ce que n'importe qui chiffrer un
-message que moi seul pourrai déchiffrer, car ma clé est privée. Donner sa clé
-privée revient à donner accès à son bitcoin, ou pire : donner accès à tous ses
-serveurs à n'importe qui !
+message que moi seul pourrai déchiffrer, car ma clé est privée. Ca ne ressemble
+pas vraiment un coffre fort dans ce cas, mais plus à une boîte aux lettres : la
+clé publique est mon adresse (tout le monde peut m'envoyer du courrier...), et
+ma clé privée est la clé de la boîte aux lettres (... mais moi seul peut le
+lire). Donner sa clé privée revient à donner accès à son bitcoin, ou pire :
+donner accès à tous ses serveurs !
 
 Bref, voilà pour la petite histoire. Pour créer une nouvelle combinaison de clé
 (privée + publique), il existe la commande `ssh-keygen`. Il existe plusieurs
