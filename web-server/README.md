@@ -74,6 +74,8 @@ Pour créer un nouveau service, il faut simplement créer un script dans le
 dossier `/etc/init.d/nom_du_service`. Le fichier
 `tuto-linux/web-server/iti/iti.service` peut être copié sous le nom `iti` pour
 créer le service *iti* qui va lancer *node* pour nous.
+nécéssaire d'ouvrir ce fichier et de le modifier pour comprendre (en gros)
+comment il est structuré et changer quelques valeures si besoin...
 
 Dernière étape : ajouter le site iti dans la configuration de nginx, pour que
 le site soit accessible sur [`http://iti/`](http://iti/) en local (et donc
