@@ -40,5 +40,5 @@ J'ajoute quelques commandes plutôt utiles (les détails sont dans le *man*) :
   vont être pris en compte en faisant `git commit`)
 - `git pull` : c'est l'inverse de git push (ça récupère les modifications du
   dépôt global pour mettre à jour le dépôt local)
--`git clone` : pour créer (clôner) un dépôt local à partir d'un dépôt global
+- `git clone` : pour créer (clôner) un dépôt local à partir d'un dépôt global
   existant
