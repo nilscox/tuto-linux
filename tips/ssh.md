@@ -23,12 +23,12 @@ Dans le cas du chiffrage asymétrique, il existe deux clées : une permettant
 uniquement le chiffrement (la clé publique) et la seconde permettant uniquement
 le déchiffrement (la clé privée). La clé publique peut être distribuée
 librement, de manière à ce que n'importe qui chiffrer un message que moi seul
-pourrai déchiffrer, car ma clé est privée. Ca ne ressemble pas vraiment un
-coffre fort dans ce cas, mais plus à une boîte aux lettres : la clé publique
-est mon adresse (tout le monde peut m'envoyer du courrier...), et ma clé privée
-est la clé de la boîte aux lettres (... mais moi seul peut le lire). Donner sa
-clé privée revient à donner accès à son bitcoin, ou pire : donner accès à tous
-ses serveurs !
+pourrai déchiffrer, car ma clé de déchiffrement est privée. Ca ne ressemble pas
+vraiment un coffre fort dans ce cas, mais plus à une boîte aux lettres : la clé
+publique est mon adresse (tout le monde peut m'envoyer du courrier...), et ma
+clé privée est la clé de la boîte aux lettres (... mais moi seul peut le lire).
+Donner sa clé privée revient à donner accès à son bitcoin, ou pire : donner
+accès à tous ses serveurs !
 
 Bref, voilà pour la petite histoire. Pour créer une nouvelle combinaison de clé
 (privée + publique), il existe la commande `ssh-keygen`. Il existe plusieurs
@@ -41,6 +41,21 @@ de passe), au cas où elle serait récupérée par un vilain hacker (ça m'est
 arrivé sur mon serveur...). `ssh-keygen` demande d'entrer (ou pas) une
 passephrase, il est bien entendu important d'en choisir une (et de la retenir :
 plus de passephrase = plus de bitcoin).
+
+## Lien avec git
+
+Les échanges entre deux dépôts [git](git.md) (essentiellement `push` et `pull`)
+se font via HTTP ou SSH. Par défaut, c'est en HTTP (il faut préciser son
+adresse mail + mot de passe à chaque fois). Il est possible d'ajouter sa clé
+privée sur son profil github pour que les échanges se fassent via SSH.
+
+## Ajouter sa clé sur une machine
+
+Si on a un accès SSH avec user + password sur une machine, il est possible d'y
+ajouter sa clé publique, et pouvoir utiliser sa clé pour se logger. Pour cela,
+il existe `ssh-copy-id` (cela va simplement ajouter la clé publique de la
+machine locale dans le fichier `~/.ssh/authorized_keys` sur la machine
+distante).
 
 ## scp
 
