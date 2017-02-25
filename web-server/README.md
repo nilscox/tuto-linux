@@ -17,20 +17,21 @@ des pages web dynamiquement (avec du code).
 
 ## Nginx
 
-*Nginx* est un serveur web. Il est utilisé le plus souvent en tant que *démon*
-(daemon en anglais), et est appelé un *service* sous linux.  Un démon est un
-programme qui tourne en tâche de fond. Il peut être contrôlé avec la commande
-`service` sous debian, ce qui permet de le démarrer, l'arrêter, le
-redémarrer...
+*Nginx* est un serveur web. C'est un programme un peu particulier, car il doit
+tourner en tâche de fond. C'est ce que l'on appelle un *service* sous linux (ou
+un daemon). Il y a plusieurs commandes pouvant être utilisées pour le contrôler
+(démarrer, arrêter, redémarrer...), par exemple `systemctl` ou encore
+`service`. Ici nous utiliserons `systemctl`.
 
 Comme je l'ai déjà dit, le but de l'exo est d'installer et de configurer nginx
 pour donner accès à deux sites. [La documentation](http://nginx.org/en/docs/)
 est assez bien faite (et il y a toujours [stackov'](http://stackoverflow.com/)
 en cas de pépin...).
 
-C'est parti, il est temps d'installer et de lancer nginx. Nous reviendrons sur
-sa config plus tard... Si le serveur est bien lancé, un message doit s'afficher
-sur [http://localhost/](http://localhost/).
+C'est parti, il est temps d'installer et de lancer nginx (en principe il se
+lance tout seul après avoir été installé). Nous reviendrons sur sa config plus
+tard... Si le serveur est bien lancé, un message doit s'afficher sur
+[http://localhost/](http://localhost/).
 
 ## Raspout
 
@@ -44,8 +45,8 @@ de site est totalement lible (une page HTML simple et un peu de CSS feront tout
 Une fois que le site est terminé, il faut le déployer (le rendre accessible en
 ligne). Première étape : créer un nouveau hostname pour faire des tests en
 local. C'est à dire qu'on va devoir être capable d'accédér au site sur
-[http://raspout/](http://raspout), mais uniquement depuis ta machine (quelques
-infos [ici](http://lmgtfy.com/?q=debian+host)).
+[http://raspout/](http://raspout), mais uniquement depuis la machine locale
+(quelques infos [ici](https://google.com/?q=debian+host)).
 
 C'est maintenant parti pour configurer nginx !
 [GLHF](http://nginx.org/en/docs/beginners_guide.html) !
@@ -67,23 +68,19 @@ accessible sur [http://localhost:4242/](http://localhost:4242/).
 
 Avoir une console ouverte pour que le site tourne en permanance, c'est pas
 pratique. Heureusement, il existe une commande qui permet de lancer un
-programme en tant que démon ! Hmmm...
+programme en tâche de fond ! Hmmm...
 
-Pour créer un nouveau démon (un nouveau service), il faut simplement créer un
-script dans le dossier `/etc/init.d/nom_du_service`. Le fichier
+Pour créer un nouveau service, il faut simplement créer un script dans le
+dossier `/etc/init.d/nom_du_service`. Le fichier
 `tuto-linux/web-server/iti/iti.service` peut être copié sous le nom `iti` pour
-créer un service qui va lancer node pour nous. Il est maintenant possible de
-lancer le site en tâche de fond avec une seule commande !
+créer le service **iti** qui va lancer *node* pour nous.
 
 Dernière étape : ajouter le site iti dans la configuration de nginx, pour que
 le site soit accessible sur [`http://iti/`](http://iti/) en local (et donc
 ajouter le hostname `iti`). Encore une fois, la doc est relativement claire sur
 la configuration d'un *proxy server*.
 
-## Déploiement en prod
+## Bonus
 
-Une fois que les deux sites sont fonctionnels en local, on peut les déployer en
-production (les rendre accessible sur internet) ! Il suffit de changer les
-hostnames en *iti.nilslayet.com* et *raspout.nilslayet.com*, et de m'envoyer un
-sms pour me donner ton adresse IP (sans oublier d'ouvrir le port 80 sur ta
-box).
+Déploiement en prod : le but est de donner accès aux deux sites sur les
+adresses *raspout.nilslayet.com* ainsi que *iti.nilslayet.com*.
