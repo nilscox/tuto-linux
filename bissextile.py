@@ -1,19 +1,11 @@
-def printYear(y, isLeap):
-    y = str(y)
-    if isLeap:
+def printYear(y):
+    leap = isLeap(int(y))
+    if leap:
         print(y + " is a leap year")
     else:
         print(y + " is not a leap year")
 
-def b(a):
-    if a % 4 == 0 and a % 100 != 0:
-        printYear(a, True)
-    elif a % 400 == 0:
-        printYear(a, True)
-    else:
-        printYear(a, False)
+def isLeap(y):
+    return (y % 4 == 0 and y % 100 != 0) or y % 400 == 0
 
-b(2009)
-b(2092)
-b(2042)
-b(2012)
+printYear(input("enter a year number: "))
