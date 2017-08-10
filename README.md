@@ -13,3 +13,4 @@ Tips :
 Exos :
 
 - [Web server](/web-server/README.md)
+- [Python: If](/python/if/README.md)
