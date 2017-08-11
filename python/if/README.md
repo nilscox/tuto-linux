@@ -24,11 +24,11 @@ en paramêtre est une voyelle ou `faux` sinon.
 
 Prototype: `isVowel(char) -> bool`
 
-## max
+## max2
 
-Ecrire la fonction `max` calculant le maximum entre deux entiers.
+Ecrire la fonction `max2` calculant le maximum entre deux entiers.
 
-Prototype: `max(int, int) -> int`
+Prototype: `max2(int, int) -> int`
 
 ## max3
 
