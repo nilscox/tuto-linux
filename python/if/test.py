@@ -64,6 +64,18 @@ def test_max3():
     a(f, [3, 1, 2], 3)
     a(f, [3, 2, 1], 3)
 
+def test_med():
+    f = None
+    try: f = med
+    except NameError: return
+
+    a(f, [1, 2, 3], 2)
+    a(f, [1, 3, 2], 2)
+    a(f, [2, 1, 3], 2)
+    a(f, [2, 3, 1], 2)
+    a(f, [3, 1, 2], 2)
+    a(f, [3, 2, 1], 2)
+
 def test_daysInMonth():
     f = None
     try: f = daysInMonth
@@ -149,6 +161,7 @@ for f in [
     test_isVowel,
     test_max2,
     test_max3,
+    test_med,
     test_daysInMonth,
     test_areValidTriangleAngles,
     test_areValidTriangleSides,
