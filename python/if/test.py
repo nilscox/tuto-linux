@@ -10,111 +10,144 @@ def a(f, args, expected):
         print('[\033[32mOK\033[0m] ' + f.__name__ + '(' + ', '.join(map(str, args)) + ')')
 
 def test_isPositive():
-    try: isPositive
+    f = None
+    try: f = isPositive
     except NameError: return
-    a(isPositive, [42], True)
-    a(isPositive, [123456789], True)
-    a(isPositive, [-1], False)
-    a(isPositive, [-123456789], False)
-    a(isPositive, [0], None)
+
+    a(f, [42], True)
+    a(f, [123456789], True)
+    a(f, [-1], False)
+    a(f, [-123456789], False)
+    a(f, [0], None)
 
 def test_isOdd():
-    try: isOdd
+    f = None
+    try: f = isOdd
     except NameError: return
-    a(isOdd, [2], False)
-    a(isOdd, [3], True)
-    a(isOdd, [0], False)
-    a(isOdd, [123456789], True)
-    a(isOdd, [876543210], False)
-    a(isOdd, [-1], True)
-    a(isOdd, [-2], False)
+
+    a(f, [2], False)
+    a(f, [3], True)
+    a(f, [0], False)
+    a(f, [123456789], True)
+    a(f, [876543210], False)
+    a(f, [-1], True)
+    a(f, [-2], False)
 
 def test_isVowel():
-    try: isVowel
+    f = None
+    try: f = isVowel
     except NameError: return
-    a(isVowel, ['a'], True)
-    a(isVowel, ['y'], True)
-    a(isVowel, ['b'], False)
-    a(isVowel, ['8'], False)
 
-def test_max():
-    try: max
+    a(f, ['a'], True)
+    a(f, ['y'], True)
+    a(f, ['b'], False)
+    a(f, ['8'], False)
+
+def test_max2():
+    f = None
+    try: f = max2
     except NameError: return
-    a(max, [1, 2], 2)
-    a(max, [2, 1], 2)
+
+    a(f, [1, 2], 2)
+    a(f, [2, 1], 2)
+    a(f, [-1, 1], 1)
 
 def test_max3():
-    try: max3
+    f = None
+    try: f = max3
     except NameError: return
-    a(max3, [1, 2, 3], 3)
-    a(max3, [1, 3, 2], 3)
-    a(max3, [2, 1, 3], 3)
-    a(max3, [2, 3, 1], 3)
-    a(max3, [3, 1, 2], 3)
-    a(max3, [3, 2, 1], 3)
+
+    a(f, [1, 2, 3], 3)
+    a(f, [1, 3, 2], 3)
+    a(f, [2, 1, 3], 3)
+    a(f, [2, 3, 1], 3)
+    a(f, [3, 1, 2], 3)
+    a(f, [3, 2, 1], 3)
 
 def test_daysInMonth():
-    try: daysInMonth
+    f = None
+    try: f = daysInMonth
     except NameError: return
-    a(daysInMonth, [1], 31)
-    a(daysInMonth, [2], 28)
-    a(daysInMonth, [4], 30)
-    a(daysInMonth, [7], 31)
-    a(daysInMonth, [8], 31)
-    a(daysInMonth, [9], 30)
-    a(daysInMonth, [12], 31)
+    a(f, [1], 31)
+    a(f, [2], 28)
+    a(f, [4], 30)
+    a(f, [7], 31)
+    a(f, [8], 31)
+    a(f, [9], 30)
+    a(f, [12], 31)
 
 def test_areValidTriangleAngles():
-    try: areValidTriangleAngles
+    f = None
+    try: f = areValidTriangleAngles
     except NameError: return
-    a(areValidTriangleAngles, [1, 2, 3], False)
-    a(areValidTriangleAngles, [60, 60, 60], True)
-    a(areValidTriangleAngles, [40, 50, 90], True)
-    a(areValidTriangleAngles, [1, 178, 1], True)
-    a(areValidTriangleAngles, [100, 30, 40], False)
-    a(areValidTriangleAngles, [-10, 10, 180], False)
-    a(areValidTriangleAngles, [-10, 30, 160], False)
-    a(areValidTriangleAngles, [0, 0, 0], False)
-    a(areValidTriangleAngles, [-1, -1, -1], False)
+    a(f, [1, 2, 3], False)
+    a(f, [60, 60, 60], True)
+    a(f, [40, 50, 90], True)
+    a(f, [1, 178, 1], True)
+    a(f, [100, 30, 40], False)
+    a(f, [-10, 10, 180], False)
+    a(f, [-10, 30, 160], False)
+    a(f, [0, 0, 0], False)
+    a(f, [-1, -1, -1], False)
 
 def test_areValidTriangleSides():
-    try: areValidTriangleSides
+    f = None
+    try: f = areValidTriangleSides
     except NameError: return
-    a(areValidTriangleSides, [1, 2, 3], False)
-    a(areValidTriangleSides, [5, 3, 4], True)
-    a(areValidTriangleSides, [101, 99, 20], True)
+    a(f, [1, 2, 3], True)
+    a(f, [5, 3, 4], True)
+    a(f, [10, 1, 1], False)
+    a(f, [1, 10, 1], False)
+    a(f, [1, 1, 10], False)
+    a(f, [10, 5, 5], True)
+    a(f, [-1, 2, 3], False)
+    a(f, [1, -2, 3], False)
+    a(f, [1, 2, -3], False)
+
+def test_areValidRightTriangleSides():
+    f = None
+    try: f = areValidRightTriangleSides
+    except NameError: return
+    a(f, [1, 2, 3], False)
+    a(f, [5, 3, 4], True)
+    a(f, [101, 99, 20], True)
+    a(f, [-5, 3, 4], False)
+    a(f, [5, -3, 4], False)
+    a(f, [5, 3, -4], False)
 
 def test_solveQuadratic():
-    try: solveQuadratic
+    f = None
+    try: f = solveQuadratic
     except NameError: return
-    a(solveQuadratic, [1, 2, 3], None)
-    a(solveQuadratic, [1, 3, 2], (-2., -1.))
-    a(solveQuadratic, [2, 1, 3], None)
-    a(solveQuadratic, [2, 3, 1], (-1., -0.5))
-    a(solveQuadratic, [1, 2, 1], -1.)
-    a(solveQuadratic, [1, 1, 0], (-1., 0.))
-    a(solveQuadratic, [1, 0, 0], 0.)
+    a(f, [1, 2, 3], None)
+    a(f, [1, 3, 2], (-2., -1.))
+    a(f, [2, 1, 3], None)
+    a(f, [2, 3, 1], (-1., -0.5))
+    a(f, [1, 2, 1], -1.)
+    a(f, [1, 1, 0], (-1., 0.))
+    a(f, [1, 0, 0], 0.)
 
 def test_isSorted():
-    try: isSorted
+    f = None
+    try: f = isSorted
     except NameError: return
-    a(isSorted, [[]], True)
-    a(isSorted, [[42]], True)
-    a(isSorted, [[42, 51]], True)
-    a(isSorted, [[51, 42]], True)
-    a(isSorted, [[1, 2, 3]], True)
-    a(isSorted, [[3, 2, 1]], True)
-    a(isSorted, [[-12, -8, 0, 1, 42, 123]], True)
-    a(isSorted, [[12, 8, -0, -1, -42, -123]], True)
-    a(isSorted, [[1, 3, 2]], False)
-    a(isSorted, [[3, 2, 3]], False)
-    a(isSorted, [[1, 2, 3, 5, 4, 6, 7]], False)
+    a(f, [[]], True)
+    a(f, [[42]], True)
+    a(f, [[42, 51]], True)
+    a(f, [[51, 42]], True)
+    a(f, [[1, 2, 3]], True)
+    a(f, [[3, 2, 1]], True)
+    a(f, [[-12, -8, 0, 1, 42, 123]], True)
+    a(f, [[12, 8, -0, -1, -42, -123]], True)
+    a(f, [[1, 3, 2]], False)
+    a(f, [[3, 2, 3]], False)
+    a(f, [[1, 2, 3, 5, 4, 6, 7]], False)
 
 for f in [
     test_isPositive,
     test_isOdd,
     test_isVowel,
-    test_max,
+    test_max2,
     test_max3,
     test_daysInMonth,
     test_daysInMonth,
