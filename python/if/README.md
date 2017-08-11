@@ -53,17 +53,25 @@ Prototype: `daysInMonth(int) -> int`
 
 ## areValidTriangleAngles
 
-Ecrire la fonction `areValidTriangleAngles` retournant vrai si la valeur des trois
-angles du triangle passées en paramêtres permettent de former un triangle.
+Ecrire la fonction `areValidTriangleAngles` retournant vrai si la valeur des
+trois angles du triangle passées en paramêtres permettent de former un triangle.
 
 Prototype: `areValidTriangleAngles(int, int, int) -> bool`
 
 ## areValidTriangleSides
 
-Ecrire la fonction `areValidTriangleSides` retournant vrai si la valeur des trois
-angles du triangle passées en paramêtres permettent de former un triangle
+Ecrire la fonction `areValidTriangleSides` retournant vrai si la valeur des
+trois côtés du triangle passées en paramêtres permettent de former un triangle.
 
 Prototype: `areValidTriangleSides(int, int, int) -> bool`
+
+## areValidRightTriangleSides
+
+Ecrire la fonction `areValidRightTriangleSides` retournant vrai si la valeur des
+trois côtés du triangle passées en paramêtres permettent de former un triangle
+rectangle.
+
+Prototype: `areValidRightTriangleSides(int, int, int) -> bool`
 
 ## solveQuadratic
 
