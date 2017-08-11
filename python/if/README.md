@@ -82,4 +82,4 @@ Prototype: `solveQuadratic(int, int, int) -> (int, int) | int | None`
 Ecrire la fonction `isSorted`, retournant `vrai` uniquement si la liste passée
 en paramêtre est triée par ordre croissant ou décroissant, `faux` sinon.
 
-Prototype: `med(int, int, int) -> int`
+Prototype: `isSorted(list) -> bool`
