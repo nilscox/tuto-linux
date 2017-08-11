@@ -150,7 +150,6 @@ for f in [
     test_max2,
     test_max3,
     test_daysInMonth,
-    test_daysInMonth,
     test_areValidTriangleAngles,
     test_areValidTriangleSides,
     test_solveQuadratic,
