@@ -1,0 +1,33 @@
+import os
+
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+secret_word = input("Enter your secret word: ").lower()
+cls()
+
+tab = []
+
+
+def turn():
+    input_letter = input("Enter a letter :").lower()
+    tab.append(input_letter)
+    for letter in secret_word:
+        if letter in tab:
+            print(letter, end="")
+        else:
+            print("*", end="")
+    print()
+
+
+def win():
+    for letter in secret_word:
+        if letter not in tab:
+            return False
+    return True
+
+while not win():
+    turn()
+
+
