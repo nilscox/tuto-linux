@@ -4,11 +4,10 @@ import os
 def turn(tab, secret_word):
     l = input("Enter a letter : ").lower()
 
-    if l not in tab:
-            tab.append(l)
-    else:
-        turn(tab, secret_word)
+    while l in tab :
+        l = input("Enter a letter : ").lower()
 
+    tab.append(l)
 
     print("\n", tab, "\n")
 
