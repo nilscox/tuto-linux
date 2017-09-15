@@ -3,7 +3,14 @@ import os
 
 def turn(tab, secret_word):
     l = input("Enter a letter : ").lower()
-    tab.append(l)
+
+    if l not in tab:
+            tab.append(l)
+    else:
+        turn(tab, secret_word)
+
+
+    print("\n", tab, "\n")
 
     for letter in secret_word:
             if letter in tab:
@@ -11,7 +18,7 @@ def turn(tab, secret_word):
             else:
                 print("*", end=" ")
 
-    print()
+    print("\n")
     return l not in secret_word
 
 
@@ -37,7 +44,7 @@ def game():
         if turn(tab, secret_word):
             lives -= 1
 
-        print(lives)
+        print("lives : ", str(lives) + "\n")
 
     if win(lives, tab, secret_word):
         print("You win!")
