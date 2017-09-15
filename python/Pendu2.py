@@ -12,7 +12,7 @@ def turn(tab, secret_word):
                 print("*", end=" ")
 
     print()
-    return False
+    return l not in secret_word
 
 
 def win(lives, tab, secret_word):
@@ -23,6 +23,7 @@ def win(lives, tab, secret_word):
         if letter not in tab:
             return False
 
+    return True
 
 
 def game():
@@ -32,10 +33,15 @@ def game():
     tab = []
     lives = 11
 
-    while not win(lives, tab, secret_word):
-        turn(tab, secret_word)
+    while lives > 0 and not win(lives, tab, secret_word):
+        if turn(tab, secret_word):
+            lives -= 1
 
-    print("You win!")
+        print(lives)
 
+    if win(lives, tab, secret_word):
+        print("You win!")
+    else:
+        print("You didn't win this time x(")
 
 game()
