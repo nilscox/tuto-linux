@@ -18,7 +18,7 @@ def moreorless(args):
         elif int(args[1]) < secret_nb:
             return "More !"
         else:
-            return "You win !" + str(secret_nb) + "is the Secret Number !"
+            return "You win !" + str(secret_nb) + " is the Secret Number !"
 
     else:
         return "You must enter 'start' if you want to begin or 'answer' if you want to continue."
