@@ -13,12 +13,9 @@ class Bot(irc.client.SimpleIRCClient):
         print('privmsg' + str(event))
 
         sender = event.source.split("!")[0]
-        splitted = event.arguments[0].split(" ", 1)
+        splitted = event.arguments[0].split(" ")
         command = splitted[0]
-        args = None
-
-        if len(splitted) > 1:
-            args = " ".join(splitted[1:])
+        args = splitted[1:]
 
         for function in self.functable:
             if function.__name__ == command:
