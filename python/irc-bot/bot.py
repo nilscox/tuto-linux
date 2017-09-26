@@ -2,9 +2,11 @@ import irc.client
 
 class Bot(irc.client.SimpleIRCClient):
 
-    def __init__(self, functable):
+    def __init__(self, clazz):
         irc.client.SimpleIRCClient.__init__(self)
-        self.functable = functable
+        self.handlers = []
+        for c in clazz:
+            self.handlers.append(c())
 
     def on_welcome(self, connection, event):
         print('Welcome!')
@@ -14,12 +16,12 @@ class Bot(irc.client.SimpleIRCClient):
 
         sender = event.source.split("!")[0]
         splitted = event.arguments[0].split(" ")
-        command = splitted[0]
+        command = splitted[0].lower()
         args = splitted[1:]
 
-        for function in self.functable:
-            if function.__name__ == command:
-                result = function(args)
+        for handler in self.handlers:
+            if type(handler).__name__.lower() == command:
+                result = handler.command(args)
                 if result:
                     self.send_message(sender, result)
 
