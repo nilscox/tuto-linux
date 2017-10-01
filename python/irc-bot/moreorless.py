@@ -24,7 +24,7 @@ def answer(args):
         return "You win ! " + str(secret_nb) + " is the Secret Number !"
 
 
-def moreorless(args):
+def moreorless(bot, args):
 
     if args[0] == "start":
         return start(args)

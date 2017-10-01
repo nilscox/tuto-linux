@@ -21,20 +21,33 @@ SECRET_LIST = [
     "canard",
 ]
 
-secret_word = ""
+secret_word = None
 lives = 0
 tab = []
 
-def start(args):
+
+def start(bot, args):
     global secret_word
     global lives
     global tab
 
-    secret_word = random.choice(SECRET_LIST)
+    if len(args) < 1:
+        return "You must provide a channel."
+
+    channel = args[0]
+
     lives = 11
     tab = []
 
-    return "*" * len(secret_word)
+    if len(args) > 1:
+        secret_word = args[1]
+    else:
+        secret_word = random.choice(SECRET_LIST)
+
+    bot.send_message(channel, "*" * len(secret_word))
+
+    return "The game just started."
+
 
 def answer(args):
     global secret_word
@@ -67,11 +80,12 @@ def answer(args):
 
     return "Lives : " + str(lives) + ", " + result
 
-def hangman(args):
+
+def hangman(bot, args):
     command = args[0]
 
     if command == "start":
-        return start(args)
+        return start(bot, args[1:])
     elif command == "answer":
         return answer(args)
     else:
