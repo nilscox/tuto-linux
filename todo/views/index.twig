@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ToDoo</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="wrapper">
+
+    <div id="head">
+      <h1 class="title">ToDoo List</title>
+    </div>
+
+    <div id="list">
+      <ul class="todos">
+
+        {% for todo in todos %}
+        <li class="todo {% if todo.done %}todo--done{% endif %}">
+          {{ todo.text }}
+          <a href="/remove/{{ todo.id }}">
+            <div class="remove-icon"></div>
+          </a>
+        </li>
+        {% else %}
+        <li class="todo todo--empty">No todos.</li>
+        {% endfor %}
+
+        <li class="todo todo-input">
+          <form action="/add" method="post">
+            <input placeholder="Add..." name="text" />
+          </form>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
