@@ -1,16 +1,25 @@
+from random import choice
 from calculations import bubble_position
 
 RADIUS = 20
-
+COLORS = [
+    'red',
+    'green',
+    'blue',
+    'yellow',
+    'purple',
+    'brown',
+    'pink',
+]
 
 class Bubble:
 
-    def __init__(self, canvas, position, direction, color):
+    def __init__(self, canvas, position, direction):
         self.canvas = canvas
         self.position = position
         self.direction = direction
         self.speed = 8
-        self.circle = canvas.create_oval(*bubble_position(self.position), fill=color, width=0)
+        self.circle = canvas.create_oval(*bubble_position(self.position), fill=choice(COLORS), width=0)
 
     def set_position(self, position):
         self.canvas.coords(self.circle, *bubble_position(position))

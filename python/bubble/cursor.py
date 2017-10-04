@@ -17,7 +17,7 @@ class Cursor:
         canvas.bind('<Button-1>', self.on_click)
 
     def fire(self, direction):
-        bubble = Bubble(self.canvas, self.position, direction, 'blue')
+        bubble = Bubble(self.canvas, self.position, direction)
         self.bubbles.append(bubble)
 
     def update(self):
