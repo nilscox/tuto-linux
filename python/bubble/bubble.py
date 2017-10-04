@@ -1,3 +1,5 @@
+from calculations import bubble_position
+
 RADIUS = 20
 
 
@@ -15,14 +17,17 @@ class Bubble:
 
         self.circle = canvas.create_oval(x0, y0, x1, y1, fill=color, width=0)
 
-    def update(self):
+    def set_position(self, position):
+        self.canvas.coords(self.circle, *bubble_position(position))
+        self.position = position
+
+    def move(self, direction):
+        dx, dy = direction
         x, y = self.position
-        dx, dy = self.direction
-        x, y = x + dx * self.speed, y + dy * self.speed
-        self.position = (x, y)
-        x0, y0 = x - RADIUS, y - RADIUS
-        x1, y1 = x + RADIUS, y + RADIUS
-        self.canvas.coords(self.circle, x0, y0, x1, y1)
+        self.set_position((x + dx * self.speed, y + dy * self.speed))
+
+    def update(self):
+        self.move(self.direction)
 
     def on_click(self, event):
         x0, y0 = event.x - RADIUS, event.y - RADIUS
