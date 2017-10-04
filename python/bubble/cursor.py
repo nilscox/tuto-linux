@@ -10,18 +10,19 @@ class Cursor:
         self.canvas = canvas
         self.position = position
         self.angle = 0
-        self.bubble = None
+        self.bubbles = []
 
         self.line = canvas.create_line(*cursor_position(self.angle), width=4)
         canvas.bind('<Motion>', self.on_mousemove)
         canvas.bind('<Button-1>', self.on_click)
 
     def fire(self, direction):
-        self.bubble = Bubble(self.canvas, self.position, direction, 'blue')
+        bubble = Bubble(self.canvas, self.position, direction, 'blue')
+        self.bubbles.append(bubble)
 
     def update(self):
-        if self.bubble is not None:
-            self.bubble.update()
+        for bubble in self.bubbles:
+            bubble.update()
 
     def on_mousemove(self, event):
         x, y = self.position
