@@ -10,6 +10,7 @@ class Cursor:
         self.canvas = canvas
         self.position = position
         self.angle = 0
+        self.next_bubble = Bubble(self.canvas, self.position)
         self.bubbles = []
 
         self.line = canvas.create_line(*cursor_position(self.angle), width=4)
@@ -17,8 +18,9 @@ class Cursor:
         canvas.bind('<Button-1>', self.on_click)
 
     def fire(self, direction):
-        bubble = Bubble(self.canvas, self.position, direction)
-        self.bubbles.append(bubble)
+        self.next_bubble.set_direction(direction)
+        self.bubbles.append(self.next_bubble)
+        self.next_bubble = Bubble(self.canvas, self.position)
 
     def update(self):
         for bubble in self.bubbles:
