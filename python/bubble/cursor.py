@@ -1,5 +1,5 @@
-from math import sin, cos, atan, sqrt
 from bubble import Bubble
+from calculations import cursor_position, cursor_angle, cursor_fire_direction
 
 SIZE = 42
 
@@ -12,38 +12,24 @@ class Cursor:
         self.angle = 0
         self.bubble = None
 
-        x, y = position
-        x0, y0 = x - SIZE * sin(self.angle), y - SIZE * cos(self.angle)
-        x1, y1 = x + SIZE * sin(self.angle), y + SIZE * cos(self.angle)
-
-        self.line = canvas.create_line(x0, y0, x1, y1, width=4)
-        canvas.bind('<Motion>', self.on_move)
+        self.line = canvas.create_line(*cursor_position(self.angle), width=4)
+        canvas.bind('<Motion>', self.on_mousemove)
         canvas.bind('<Button-1>', self.on_click)
 
-    def fire(self, x, y):
-        l = sqrt(x * x + y * y)
-        x, y = x / l, y / l
-        self.bubble = Bubble(self.canvas, self.position, (x, y), 'blue')
+    def fire(self, direction):
+        self.bubble = Bubble(self.canvas, self.position, direction, 'blue')
 
     def update(self):
         if self.bubble is not None:
             self.bubble.update()
 
-    def on_move(self, event):
+    def on_mousemove(self, event):
         x, y = self.position
-        ex, ey = event.x, event.y
-        dx, dy = ex - x, ey - y
-
-        self.angle = atan(dx / dy)
-
-        x0, y0 = x - SIZE * sin(self.angle), y - SIZE * cos(self.angle)
-        x1, y1 = x + SIZE * sin(self.angle), y + SIZE * cos(self.angle)
-
-        self.canvas.coords(self.line, x0, y0, x1, y1)
+        direction = event.x - x, event.y - y
+        self.angle = cursor_angle(direction)
+        self.canvas.coords(self.line, *cursor_position(self.angle))
 
     def on_click(self, event):
         x, y = self.position
-        ex, ey = event.x, event.y
-        dx, dy = ex - x, ey - y
-
-        self.fire(dx, dy)
+        direction = event.x - x, event.y - y
+        self.fire(cursor_fire_direction(direction))

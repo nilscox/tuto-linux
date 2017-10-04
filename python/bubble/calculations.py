@@ -21,10 +21,7 @@ def cursor_fire_direction(direction):
 
 
 def cursor_angle(direction):
-    x, y = CURSOR_POSITION
-    dirx, diry = direction
-    dx, dy = dirx - x, diry - y
-
+    dx, dy = direction
     return atan(dx / dy)
 
 

@@ -10,12 +10,7 @@ class Bubble:
         self.position = position
         self.direction = direction
         self.speed = 8
-
-        x, y = position
-        x0, y0 = x - RADIUS, y - RADIUS
-        x1, y1 = x + RADIUS, y + RADIUS
-
-        self.circle = canvas.create_oval(x0, y0, x1, y1, fill=color, width=0)
+        self.circle = canvas.create_oval(*bubble_position(self.position), fill=color, width=0)
 
     def set_position(self, position):
         self.canvas.coords(self.circle, *bubble_position(position))
@@ -28,8 +23,3 @@ class Bubble:
 
     def update(self):
         self.move(self.direction)
-
-    def on_click(self, event):
-        x0, y0 = event.x - RADIUS, event.y - RADIUS
-        x1, y1 = event.x + RADIUS, event.y + RADIUS
-        self.canvas.coords(self.circle, x0, y0, x1, y1)
