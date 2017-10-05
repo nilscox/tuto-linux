@@ -1,9 +1,5 @@
 from math import sin, cos, atan, sqrt
-
-CURSOR_LENGTH = 42
-CURSOR_POSITION = (320, 420)
-BUBBLE_RADIUS = 20
-CELL_SIZE = BUBBLE_RADIUS + 2
+from constants import *
 
 
 def cursor_position(angle):
@@ -37,9 +33,10 @@ def bubble_position(position):
 
 def cell_position(position):
     x, y = position
+    hsize = CELL_SIZE / 2
 
-    x0, y0 = x - CELL_SIZE, y - CELL_SIZE
-    x1, y1 = x + CELL_SIZE, y + CELL_SIZE
+    x0, y0 = x - hsize, y - hsize
+    x1, y1 = x + hsize, y + hsize
 
     return x0, y0, x1, y1
 
@@ -49,3 +46,13 @@ def cell_bubble_collision(cell, bubble):
     bx, by = bubble.get_position()
 
     return x0 < bx < x1 and y0 < by < y1
+
+
+def grid_cells():
+    return GRID_LINES * GRID_COLS
+
+
+def grid_cell_position(n):
+    x, y = n % GRID_COLS, int(n / GRID_COLS)
+
+    return CELL_SIZE + CELL_SIZE * x, CELL_SIZE + CELL_SIZE * y
