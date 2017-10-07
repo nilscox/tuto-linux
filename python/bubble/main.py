@@ -16,8 +16,6 @@ canvas.pack()
 
 
 while True:
-    cursor.update()
-    for bubble in cursor.bubbles:
-        grid.update(bubble)
+    grid.update()
     top.update()
     time.sleep(1 / FPS)

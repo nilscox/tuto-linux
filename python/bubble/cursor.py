@@ -1,3 +1,4 @@
+import events
 from bubble import Bubble
 from calculations import cursor_position, cursor_angle, cursor_fire_direction
 
@@ -11,7 +12,6 @@ class Cursor:
         self.position = position
         self.angle = 0
         self.next_bubble = Bubble(self.canvas, self.position)
-        self.bubbles = []
 
         self.line = canvas.create_line(*cursor_position(self.angle), width=4)
         canvas.bind('<Motion>', self.on_mousemove)
@@ -19,12 +19,9 @@ class Cursor:
 
     def fire(self, direction):
         self.next_bubble.set_direction(direction)
-        self.bubbles.append(self.next_bubble)
+        bubble = self.next_bubble
         self.next_bubble = Bubble(self.canvas, self.position)
-
-    def update(self):
-        for bubble in self.bubbles:
-            bubble.update()
+        return bubble
 
     def on_mousemove(self, event):
         x, y = self.position
@@ -35,4 +32,5 @@ class Cursor:
     def on_click(self, event):
         x, y = self.position
         direction = event.x - x, event.y - y
-        self.fire(cursor_fire_direction(direction))
+        bubble = self.fire(cursor_fire_direction(direction))
+        events.trigger('fire', bubble)
