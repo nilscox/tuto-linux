@@ -41,11 +41,18 @@ def cell_position(position):
     return x0, y0, x1, y1
 
 
-def cell_bubble_collision(cell, bubble):
+def cell_bubble_collision(cells, cell, bubble):
     x0, y0, x1, y1 = cell_position(cell.get_position())
     bx, by = bubble.get_position()
 
     return x0 < bx < x1 and y0 < by < y1
+
+
+def grid_bubble_collision(cells, bubble):
+    for cell in cells:
+        if cell_bubble_collision(cells, cell, bubble):
+            cell.set_bubble(bubble)
+            break
 
 
 def grid_cells():

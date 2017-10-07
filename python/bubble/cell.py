@@ -1,4 +1,4 @@
-from calculations import cell_position, cell_bubble_collision
+from calculations import cell_position
 
 
 class Cell:
@@ -11,9 +11,7 @@ class Cell:
     def get_position(self):
         return self.position
 
-    def check_collisions(self, bubble):
-        if cell_bubble_collision(self, bubble):
-            bubble.stop()
-            bubble.set_position(self.position)
-
-            self.bubble = bubble
+    def set_bubble(self, bubble):
+        bubble.stop()
+        bubble.set_position(self.position)
+        self.bubble = bubble

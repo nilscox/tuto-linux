@@ -1,5 +1,5 @@
 import events
-from calculations import grid_cells, grid_cell_position
+from calculations import grid_cells, grid_cell_position, grid_bubble_collision
 from cell import Cell
 
 
@@ -22,5 +22,4 @@ class Grid:
     def update(self):
         if self.bubble is not None:
             self.bubble.update()
-            for cell in self.cells:
-                cell.check_collisions(self.bubble)
+            grid_bubble_collision(self.cells, self.bubble)
