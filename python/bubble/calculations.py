@@ -48,11 +48,44 @@ def cell_bubble_collision(cells, cell, bubble):
     return x0 < bx < x1 and y0 < by < y1
 
 
+def get_closest_cell(cells, bubble):
+    bx, by = bubble.get_position()
+
+    def distance(cell):
+        cx, cy = cell.get_position()
+        dx, dy = bx - cx, by - cy
+        return cell, sqrt(dx * dx + dy * dy)
+
+    m = None
+    cell = None
+
+    for (c, d) in map(distance, cells):
+        if cell is None or d < m:
+            m = d
+            cell = c
+
+    return cell
+
+
+def grid_bubble_collision_walls(cells, bubble):
+    first = cells[0]
+    last = cells[len(cells) - 1]
+    hsize = CELL_SIZE / 2
+    bx0, by0, bx1, by1 = bubble_position(bubble.get_position())
+
+    x0, y0 = first.get_position()
+    x0, y0 = x0 - hsize, y0 - hsize
+
+    x1, y1 = last.get_position()
+    x1 += hsize
+
+    return bx0 < x0 or by0 < y0 or bx1 > x1
+
+
 def grid_bubble_collision(cells, bubble):
-    for cell in cells:
-        if cell_bubble_collision(cells, cell, bubble):
-            cell.set_bubble(bubble)
-            break
+    if grid_bubble_collision_walls(cells, bubble):
+        cell = get_closest_cell(cells, bubble)
+        cell.set_bubble(bubble)
 
 
 def grid_cells():
