@@ -1,4 +1,4 @@
-from calculations import cell_position
+from calculations import cell_box
 from cursor import Cursor
 from grid import Grid
 
@@ -9,8 +9,8 @@ class Game:
         self.cursor = Cursor(canvas)
         self.grid = Grid(canvas)
 
-        for c in self.grid.cells[22].get_adjacent(self.grid.cells):
-            c.square = canvas.create_rectangle(*cell_position(c.position), fill='blue')
+        for c in self.grid.cells[4][5].get_adjacent(self.grid.cells):
+            c.square = canvas.create_rectangle(*cell_box(c.position), fill='blue')
 
     def update(self):
         self.grid.update()

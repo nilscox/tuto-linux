@@ -1,5 +1,6 @@
 import events
-from calculations import grid_cells, grid_cell_position, grid_bubble_collision
+from constants import GRID_LINES, GRID_COLS
+from calculations import grid_collision
 from cell import Cell
 
 
@@ -13,9 +14,14 @@ class Grid:
         events.subscribe('fire', self.on_fire)
         events.subscribe('attach', self.on_attach)
 
-        for i in range(grid_cells()):
-            cell = Cell(self.canvas, grid_cell_position(i), i)
-            self.cells.append(cell)
+        for i in range(GRID_LINES):
+            line = []
+
+            for j in range(GRID_COLS):
+                cell = Cell(self.canvas, j, i)
+                line.append(cell)
+
+            self.cells.append(line)
 
     def on_fire(self, bubble):
         self.bubble = bubble
@@ -26,4 +32,4 @@ class Grid:
     def update(self):
         if self.bubble is not None:
             self.bubble.update()
-            grid_bubble_collision(self.cells, self.bubble)
+            grid_collision(self.cells, self.bubble)

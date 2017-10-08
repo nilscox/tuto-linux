@@ -24,7 +24,7 @@ def cursor_angle(direction):
     return atan(dx / dy)
 
 
-def bubble_position(position):
+def bubble_box(position):
     x, y = position
 
     x0, y0 = x - BUBBLE_RADIUS, y - BUBBLE_RADIUS
@@ -33,7 +33,7 @@ def bubble_position(position):
     return x0, y0, x1, y1
 
 
-def cell_position(position):
+def cell_box(position):
     x, y = position
     hsize = CELL_SIZE / 2
 
@@ -43,95 +43,70 @@ def cell_position(position):
     return x0, y0, x1, y1
 
 
-def cell_adjacent_cells(cells, n):
-    x, y = grid_cell_position(n)
+def cell_adjacent_cells(cells, x, y):
     return []
 
 
-def get_closest_cell(cells, bubble):
-    bx, by = bubble.get_position()
+def grid_collision(cells, bubble):
 
-    def distance(cell):
-        cx, cy = cell.get_position()
-        dx, dy = bx - cx, by - cy
-        return cell, sqrt(dx * dx + dy * dy)
+    def get_closest_cell():
+        x, y = bubble.get_position()
 
-    m = None
-    cell = None
+        def distance(cell):
+            cx, cy = cell.get_position()
+            dx, dy = x - cx, y - cy
+            return cell, sqrt(dx * dx + dy * dy)
 
-    for (c, d) in map(distance, cells):
-        if cell is None or d < m:
-            m = d
-            cell = c
+        m = None
+        cell = None
 
-    return cell
+        for line in cells:
+            for (c, d) in map(distance, line):
+                if cell is None or d < m:
+                    m = d
+                    cell = c
 
+        return cell
 
-def grid_bubble_collision_walls(cells, bubble):
-    first = cells[0]
-    last = cells[len(cells) - 1]
-    hsize = CELL_SIZE / 2
-    bx0, by0, bx1, by1 = bubble_position(bubble.get_position())
+    def grid_collision_walls():
+        first = cells[0][0]
+        last = cells[GRID_LINES - 1][GRID_COLS - 1]
+        hsize = CELL_SIZE / 2
+        bx0, by0, bx1, by1 = bubble_box(bubble.get_position())
 
-    x0, y0 = first.get_position()
-    x0, y0 = x0 - hsize, y0 - hsize
+        x0, y0 = first.get_position()
+        x0, y0 = x0 - hsize, y0 - hsize
 
-    x1, y1 = last.get_position()
-    x1 += hsize
+        x1, y1 = last.get_position()
+        x1 += hsize
 
-    return bx0 < x0 or by0 < y0 or bx1 > x1
+        return bx0 < x0 or by0 < y0 or bx1 > x1
 
+    def grid_collision_cells():
 
-def grid_bubble_intersect(cells, bubble):
-    first = cells[0]
-    last = cells[len(cells) - 1]
-    hsize = CELL_SIZE / 2
-    bx0, by0, bx1, by1 = bubble_position(bubble.get_position())
+        def bubbles_intersection(b1, b2):
+            bx1, by1 = b1.get_position()
+            bx2, by2 = b2.get_position()
+            dx, dy = bx2 - bx1, by2 - by1
 
-    x0, y0 = first.get_position()
-    x0, y0 = x0 - hsize, y0 - hsize
+            d = sqrt(dx * dx + dy * dy)
 
-    x1, y1 = last.get_position()
-    x1, y1 = x1 + hsize, y1 + hsize
+            return d <= 2 * BUBBLE_RADIUS
 
-    return bx0 < x0 or by0 < y0 or bx1 > x1 or by1 > y1
+        for line in cells:
+            for cell in line:
+                cbubble = cell.get_bubble()
+                if cbubble and bubbles_intersection(bubble, cbubble):
+                    return True
 
+        return False
 
-def bubble_bubble_intersect(b1, b2):
-    bx1, by1 = b1.get_position()
-    bx2, by2 = b2.get_position()
-    dx, dy = bx2 - bx1, by2 - by1
-
-    d = sqrt(dx * dx + dy * dy)
-
-    return d <= 2 * BUBBLE_RADIUS
-
-
-def grid_bubble_collision_cells(cells, bubble):
-    if grid_bubble_intersect(cells, bubble):
-        return
-
-    for cell in cells:
-        cbubble = cell.get_bubble()
-        if cbubble and bubble_bubble_intersect(bubble, cbubble):
-            return True
-
-    return False
-
-
-def grid_bubble_collision(cells, bubble):
-    cell = get_closest_cell(cells, bubble)
-    if grid_bubble_collision_walls(cells, bubble) or grid_bubble_collision_cells(cells, bubble):
+    if grid_collision_walls() or grid_collision_cells():
+        cell = get_closest_cell()
         cell.set_bubble(bubble)
         events.publish('attach')
 
 
-def grid_cells():
-    return GRID_LINES * GRID_COLS
-
-
-def grid_cell_position(n):
-    x, y = n % GRID_COLS, int(n / GRID_COLS)
+def grid_cell_position(x, y):
     offset = CELL_SIZE / 2 if y % 2 else 0
-
     return CELL_SIZE + CELL_SIZE * x + offset, CELL_SIZE + CELL_SIZE * y

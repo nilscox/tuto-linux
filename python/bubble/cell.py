@@ -1,14 +1,15 @@
-from calculations import cell_position, cell_adjacent_cells, grid_cell_position
+from calculations import cell_box, cell_adjacent_cells, grid_cell_position
 
 
 class Cell:
 
-    def __init__(self, canvas, position, place):
-        self.position = position
-        self.place = place
+    def __init__(self, canvas, x, y):
+        self.x = x
+        self.y = y
+        self.position = grid_cell_position(x, y)
         self.bubble = None
-        self.square = canvas.create_rectangle(*cell_position(self.position))
-        canvas.create_text(self.position, text=str(self.place))
+        self.square = canvas.create_rectangle(*cell_box(self.position))
+        canvas.create_text(self.position, text=str(', '.join(map(str, [x, y]))))
 
     def get_position(self):
         return self.position
@@ -22,4 +23,4 @@ class Cell:
         self.bubble = bubble
 
     def get_adjacent(self, cells):
-        return cell_adjacent_cells(cells, self.place)
+        return cell_adjacent_cells(cells, self.x, self.y)
