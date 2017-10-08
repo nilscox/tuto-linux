@@ -26,7 +26,7 @@ class Grid:
     def on_fire(self, bubble):
         self.bubble = bubble
 
-    def on_attach(self, bubble):
+    def on_attach(self, cell, bubble):
         self.bubble = None
 
     def update(self):
@@ -36,4 +36,4 @@ class Grid:
             if cell:
                 self.bubble.stop()
                 cell.set_bubble(self.bubble)
-                events.publish('attach', self.bubble)
+                events.publish('attach', cell, self.bubble)

@@ -21,7 +21,7 @@ class Cursor:
 
         events.subscribe('attach', self.on_bubble_attach)
 
-    def on_bubble_attach(self, bubble):
+    def on_bubble_attach(self, cell, bubble):
         self.can_fire = True
 
     def fire(self, direction):
