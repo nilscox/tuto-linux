@@ -1,16 +1,6 @@
 from random import choice
 from calculations import bubble_box
-
-RADIUS = 20
-COLORS = [
-    'red',
-    'green',
-    'blue',
-    'yellow',
-    'purple',
-    'brown',
-    'pink',
-]
+from constants import BUBBLE_COLORS
 
 
 class Bubble:
@@ -20,7 +10,7 @@ class Bubble:
         self.canvas = canvas
         self.direction = None
         self.speed = 8
-        self.color = choice(COLORS)
+        self.color = choice(BUBBLE_COLORS)
         self.circle = canvas.create_oval(*bubble_box(self.position), fill=self.color, width=0)
 
     def get_color(self):
