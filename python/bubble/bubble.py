@@ -20,7 +20,11 @@ class Bubble:
         self.canvas = canvas
         self.direction = None
         self.speed = 8
-        self.circle = canvas.create_oval(*bubble_box(self.position), fill=choice(COLORS), width=0)
+        self.color = choice(COLORS)
+        self.circle = canvas.create_oval(*bubble_box(self.position), fill=self.color, width=0)
+
+    def get_color(self):
+        return self.color
 
     def get_position(self):
         return self.position
