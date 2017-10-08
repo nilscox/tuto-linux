@@ -20,6 +20,10 @@ class Cell:
     def get_bubble(self):
         return self.bubble
 
+    def get_bubble_color(self):
+        if self.bubble is not None:
+            return self.bubble.get_color()
+
     def set_bubble(self, bubble):
         bubble.set_position(self.position)
         self.bubble = bubble
