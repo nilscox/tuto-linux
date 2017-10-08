@@ -1,5 +1,6 @@
 import events
 from bubble import Bubble
+from constants import CURSOR_POSITION
 from calculations import cursor_position, cursor_angle, cursor_fire_direction
 
 SIZE = 42
@@ -7,9 +8,9 @@ SIZE = 42
 
 class Cursor:
 
-    def __init__(self, canvas, position):
+    def __init__(self, canvas):
         self.canvas = canvas
-        self.position = position
+        self.position = CURSOR_POSITION
         self.angle = 0
         self.next_bubble = Bubble(self.canvas, self.position)
         self.can_fire = True

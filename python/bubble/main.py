@@ -1,21 +1,19 @@
 import time
 import tkinter
-from cursor import Cursor
-from grid import Grid
+
+from game import Game
 
 FPS = 16
 
 top = tkinter.Tk()
 
 canvas = tkinter.Canvas(top, bg="#424242", width=640, height=480)
-
-cursor = Cursor(canvas, (320, 420))
-grid = Grid(canvas)
-
 canvas.pack()
+
+game = Game(canvas)
 
 
 while True:
-    grid.update()
+    game.update()
     top.update()
     time.sleep(1 / FPS)
