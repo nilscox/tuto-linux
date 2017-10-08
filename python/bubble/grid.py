@@ -5,6 +5,20 @@ from calculations import grid_collision
 from cell import Cell
 
 
+def create_line(canvas, i):
+    line = []
+
+    for j in range(GRID_COLS):
+        cell = Cell(canvas, j, i)
+
+        if i <= GRID_INITIAL_LINES - 1:
+            cell.set_bubble(Bubble(canvas, (0, 0)))
+
+        line.append(cell)
+
+    return line
+
+
 class Grid:
 
     def __init__(self, canvas):
@@ -16,17 +30,7 @@ class Grid:
         events.subscribe('attach', self.on_attach)
 
         for i in range(GRID_LINES):
-            line = []
-
-            for j in range(GRID_COLS):
-                cell = Cell(self.canvas, j, i)
-
-                if i <= GRID_INITIAL_LINES - 1:
-                    cell.set_bubble(Bubble(canvas, (0, 0)))
-
-                line.append(cell)
-
-            self.cells.append(line)
+            self.cells.append(create_line(self.canvas, i))
 
     def on_fire(self, bubble):
         self.bubble = bubble
@@ -52,6 +56,14 @@ class Grid:
             for cell in cells:
                 cell.get_bubble().die()
                 cell.set_bubble(None)
+
+    def spawn_line(self):
+        self.cells.pop()
+        self.cells.insert(0, create_line(self.canvas, 0))
+
+        for i in range(len(self.cells)):
+            for j in range(len(self.cells[0])):
+                self.cells[i][j].set_place(j, i)
 
     def update(self):
         if self.bubble is not None:
