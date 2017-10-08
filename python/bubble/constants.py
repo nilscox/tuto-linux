@@ -3,7 +3,6 @@ CANVAS_HEIGHT = 480
 CURSOR_LENGTH = 42
 CURSOR_POSITION = (320, 420)
 BUBBLE_RADIUS = 20
-BUBBLE_COLORS = ['red', 'green', 'blue']
 BUBBLE_COLORS = ['red', 'green', 'blue', 'yellow', 'purple', 'brown', 'pink']
 CELL_SIZE = 2 * (BUBBLE_RADIUS + 1)
 GRID_COLS = 14
