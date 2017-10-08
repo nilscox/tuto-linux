@@ -11,6 +11,9 @@ class Cell:
         self.square = canvas.create_rectangle(*cell_box(self.position))
         canvas.create_text(self.position, text=str(', '.join(map(str, [x, y]))))
 
+    def get_place(self):
+        return self.x, self.y
+
     def get_position(self):
         return self.position
 
