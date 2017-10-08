@@ -1,5 +1,5 @@
 import events
-from constants import GRID_LINES, GRID_COLS
+from constants import GRID_LINES, GRID_COLS, CELLS_TOUCHING_THRESHOLD
 from calculations import grid_collision
 from cell import Cell
 
@@ -28,6 +28,25 @@ class Grid:
 
     def on_attach(self, cell, bubble):
         self.bubble = None
+
+        def check_color(cell, path):
+            path.append(cell)
+
+            for c in cell.get_adjacent(self.cells):
+                if c in path:
+                    continue
+
+                if c.get_bubble_color() == bubble.get_color():
+                    check_color(c, path)
+
+            return path
+
+        cells = check_color(cell, [])
+
+        if len(cells) >= CELLS_TOUCHING_THRESHOLD:
+            for cell in cells:
+                cell.get_bubble().die()
+                cell.set_bubble(None)
 
     def update(self):
         if self.bubble is not None:

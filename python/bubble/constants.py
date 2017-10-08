@@ -8,3 +8,4 @@ BUBBLE_COLORS = ['red', 'green', 'blue', 'yellow', 'purple', 'brown', 'pink']
 CELL_SIZE = 2 * (BUBBLE_RADIUS + 1)
 GRID_COLS = 14
 GRID_LINES = 9
+CELLS_TOUCHING_THRESHOLD = 2

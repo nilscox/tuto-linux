@@ -25,7 +25,9 @@ class Cell:
             return self.bubble.get_color()
 
     def set_bubble(self, bubble):
-        bubble.set_position(self.position)
+        if bubble is not None:
+            bubble.set_position(self.position)
+
         self.bubble = bubble
 
     def get_adjacent(self, cells):
