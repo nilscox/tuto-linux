@@ -4,6 +4,7 @@ from calculations import cell_box, cell_adjacent_cells, grid_cell_position
 class Cell:
 
     def __init__(self, canvas, x, y):
+        self.canvas = canvas
         self.x = x
         self.y = y
         self.position = grid_cell_position(x, y)
@@ -13,6 +14,15 @@ class Cell:
 
     def get_place(self):
         return self.x, self.y
+
+    def set_place(self, x, y):
+        self.x = x
+        self.y = y
+        self.position = grid_cell_position(x, y)
+        self.canvas.coords(self.square, *cell_box(self.position))
+
+        if self.bubble is not None:
+            self.bubble.set_position(self.position)
 
     def get_position(self):
         return self.position
