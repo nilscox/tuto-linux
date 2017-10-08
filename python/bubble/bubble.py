@@ -44,6 +44,9 @@ class Bubble:
         x, y = self.position
         self.set_position((x + dx * self.speed, y + dy * self.speed))
 
+    def die(self):
+        self.canvas.delete(self.circle)
+
     def update(self):
         if self.direction is None:
             return
