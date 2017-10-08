@@ -11,6 +11,7 @@ class Grid:
         self.bubble = None
 
         events.subscribe('fire', self.on_fire)
+        events.subscribe('attach', self.on_attach)
 
         for i in range(grid_cells()):
             cell = Cell(self.canvas, grid_cell_position(i))
@@ -18,6 +19,9 @@ class Grid:
 
     def on_fire(self, bubble):
         self.bubble = bubble
+
+    def on_attach(self):
+        self.bubble = None
 
     def update(self):
         if self.bubble is not None:

@@ -12,16 +12,27 @@ class Cursor:
         self.position = position
         self.angle = 0
         self.next_bubble = Bubble(self.canvas, self.position)
+        self.can_fire = True
 
         self.line = canvas.create_line(*cursor_position(self.angle), width=4)
         canvas.bind('<Motion>', self.on_mousemove)
         canvas.bind('<Button-1>', self.on_click)
 
+        events.subscribe('attach', self.on_bubble_attach)
+
+    def on_bubble_attach(self):
+        self.can_fire = True
+
     def fire(self, direction):
-        self.next_bubble.set_direction(direction)
+        if not self.can_fire:
+            return
+
         bubble = self.next_bubble
         self.next_bubble = Bubble(self.canvas, self.position)
-        return bubble
+        self.can_fire = False
+
+        bubble.set_direction(direction)
+        events.publish('fire', bubble)
 
     def on_mousemove(self, event):
         x, y = self.position
@@ -32,5 +43,4 @@ class Cursor:
     def on_click(self, event):
         x, y = self.position
         direction = event.x - x, event.y - y
-        bubble = self.fire(cursor_fire_direction(direction))
-        events.trigger('fire', bubble)
+        self.fire(cursor_fire_direction(direction))

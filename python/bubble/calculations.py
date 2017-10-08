@@ -1,4 +1,6 @@
 from math import sin, cos, atan, sqrt
+
+import events
 from constants import *
 
 
@@ -82,10 +84,48 @@ def grid_bubble_collision_walls(cells, bubble):
     return bx0 < x0 or by0 < y0 or bx1 > x1
 
 
+def grid_bubble_intersect(cells, bubble):
+    first = cells[0]
+    last = cells[len(cells) - 1]
+    hsize = CELL_SIZE / 2
+    bx0, by0, bx1, by1 = bubble_position(bubble.get_position())
+
+    x0, y0 = first.get_position()
+    x0, y0 = x0 - hsize, y0 - hsize
+
+    x1, y1 = last.get_position()
+    x1, y1 = x1 + hsize, y1 + hsize
+
+    return bx0 < x0 or by0 < y0 or bx1 > x1 or by1 > y1
+
+
+def bubble_bubble_intersect(b1, b2):
+    bx1, by1 = b1.get_position()
+    bx2, by2 = b2.get_position()
+    dx, dy = bx2 - bx1, by2 - by1
+
+    d = sqrt(dx * dx + dy * dy)
+
+    return d <= 2 * BUBBLE_RADIUS
+
+
+def grid_bubble_collision_cells(cells, bubble):
+    if grid_bubble_intersect(cells, bubble):
+        return
+
+    for cell in cells:
+        cbubble = cell.get_bubble()
+        if cbubble and bubble_bubble_intersect(bubble, cbubble):
+            return True
+
+    return False
+
+
 def grid_bubble_collision(cells, bubble):
-    if grid_bubble_collision_walls(cells, bubble):
-        cell = get_closest_cell(cells, bubble)
+    cell = get_closest_cell(cells, bubble)
+    if grid_bubble_collision_walls(cells, bubble) or grid_bubble_collision_cells(cells, bubble):
         cell.set_bubble(bubble)
+        events.publish('attach')
 
 
 def grid_cells():

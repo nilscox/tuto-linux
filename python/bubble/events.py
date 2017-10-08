@@ -7,7 +7,9 @@ def subscribe(event, func):
     handlers[event].append(func)
 
 
-def trigger(event, *args, **kwargs):
+def publish(event, *args, **kwargs):
+    print(event)
+
     if handlers.get(event) is None:
         return
 

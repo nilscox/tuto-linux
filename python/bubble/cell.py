@@ -11,6 +11,9 @@ class Cell:
     def get_position(self):
         return self.position
 
+    def get_bubble(self):
+        return self.bubble
+
     def set_bubble(self, bubble):
         bubble.stop()
         bubble.set_position(self.position)
