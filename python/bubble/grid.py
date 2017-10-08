@@ -1,5 +1,6 @@
 import events
-from constants import GRID_LINES, GRID_COLS, CELLS_TOUCHING_THRESHOLD
+from bubble import Bubble
+from constants import GRID_LINES, GRID_COLS, CELLS_TOUCHING_THRESHOLD, GRID_INITIAL_LINES
 from calculations import grid_collision
 from cell import Cell
 
@@ -19,6 +20,10 @@ class Grid:
 
             for j in range(GRID_COLS):
                 cell = Cell(self.canvas, j, i)
+
+                if i <= GRID_INITIAL_LINES - 1:
+                    cell.set_bubble(Bubble(canvas, (0, 0)))
+
                 line.append(cell)
 
             self.cells.append(line)
