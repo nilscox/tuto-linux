@@ -44,7 +44,30 @@ def cell_box(position):
 
 
 def cell_adjacent_cells(cells, x, y):
-    return []
+
+    def get_cell(x, y):
+        if x < 0 or y < 0 or x >= GRID_COLS or y >= GRID_LINES:
+            return None
+        return cells[y][x]
+
+    ret = []
+
+    for i in range(x - 1, x + 2):
+        for j in range(y - 1, y + 2):
+            if i == x and j == y:
+                continue
+
+            if y % 2 != 0 and j != y and i == x - 1:
+                continue
+            if y % 2 == 0 and j != y and i == x + 1:
+                continue
+
+            cell = get_cell(i, j)
+
+            if cell is not None:
+                ret.append(cell)
+
+    return ret
 
 
 def grid_collision(cells, bubble):
