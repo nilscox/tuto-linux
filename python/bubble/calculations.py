@@ -43,13 +43,6 @@ def cell_position(position):
     return x0, y0, x1, y1
 
 
-def cell_bubble_collision(cells, cell, bubble):
-    x0, y0, x1, y1 = cell_position(cell.get_position())
-    bx, by = bubble.get_position()
-
-    return x0 < bx < x1 and y0 < by < y1
-
-
 def get_closest_cell(cells, bubble):
     bx, by = bubble.get_position()
 
@@ -134,5 +127,6 @@ def grid_cells():
 
 def grid_cell_position(n):
     x, y = n % GRID_COLS, int(n / GRID_COLS)
+    offset = CELL_SIZE / 2 if y % 2 else 0
 
-    return CELL_SIZE + CELL_SIZE * x, CELL_SIZE + CELL_SIZE * y
+    return CELL_SIZE + CELL_SIZE * x + offset, CELL_SIZE + CELL_SIZE * y
