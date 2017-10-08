@@ -26,10 +26,14 @@ class Grid:
     def on_fire(self, bubble):
         self.bubble = bubble
 
-    def on_attach(self):
+    def on_attach(self, bubble):
         self.bubble = None
 
     def update(self):
         if self.bubble is not None:
             self.bubble.update()
-            grid_collision(self.cells, self.bubble)
+            cell = grid_collision(self.cells, self.bubble)
+            if cell:
+                self.bubble.stop()
+                cell.set_bubble(self.bubble)
+                events.publish('attach', self.bubble)

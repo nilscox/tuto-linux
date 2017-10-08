@@ -1,6 +1,5 @@
 from math import sin, cos, atan, sqrt
 
-import events
 from constants import *
 
 
@@ -125,9 +124,7 @@ def grid_collision(cells, bubble):
         return False
 
     if grid_collision_walls() or grid_collision_cells():
-        cell = get_closest_cell()
-        cell.set_bubble(bubble)
-        events.publish('attach')
+        return get_closest_cell()
 
 
 def grid_cell_position(x, y):

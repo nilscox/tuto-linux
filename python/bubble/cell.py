@@ -21,7 +21,6 @@ class Cell:
         return self.bubble
 
     def set_bubble(self, bubble):
-        bubble.stop()
         bubble.set_position(self.position)
         self.bubble = bubble
 
