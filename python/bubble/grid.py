@@ -14,7 +14,7 @@ class Grid:
         events.subscribe('attach', self.on_attach)
 
         for i in range(grid_cells()):
-            cell = Cell(self.canvas, grid_cell_position(i))
+            cell = Cell(self.canvas, grid_cell_position(i), i)
             self.cells.append(cell)
 
     def on_fire(self, bubble):

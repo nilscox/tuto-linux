@@ -43,6 +43,11 @@ def cell_position(position):
     return x0, y0, x1, y1
 
 
+def cell_adjacent_cells(cells, n):
+    x, y = grid_cell_position(n)
+    return []
+
+
 def get_closest_cell(cells, bubble):
     bx, by = bubble.get_position()
 
