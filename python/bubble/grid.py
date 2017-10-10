@@ -65,9 +65,9 @@ class Grid:
             for j in range(len(self.cells[0])):
                 self.cells[i][j].set_place(j, i)
 
-    def update(self):
+    def update(self, ellapsed):
         if self.bubble is not None:
-            self.bubble.update()
+            self.bubble.update(ellapsed)
             cell = grid_collision(self.cells, self.bubble)
             if cell:
                 self.bubble.stop()

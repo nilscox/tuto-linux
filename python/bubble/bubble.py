@@ -37,8 +37,11 @@ class Bubble:
     def die(self):
         self.canvas.delete(self.circle)
 
-    def update(self):
+    def update(self, ellapsed):
         if self.direction is None:
             return
 
-        self.move(self.direction)
+        dx, dy = self.direction
+        direction = dx * ellapsed, dy * ellapsed
+
+        self.move(direction)

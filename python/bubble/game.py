@@ -11,8 +11,8 @@ class Game:
         self.cursor = Cursor(canvas)
         self.grid = Grid(canvas)
         self.last_line_spawn = time()
+    def update(self, ellapsed):
 
-    def update(self):
         now = time()
         diff = now - self.last_line_spawn
 
@@ -20,4 +20,4 @@ class Game:
             self.grid.spawn_line()
             self.last_line_spawn = now
 
-        self.grid.update()
+        self.grid.update(ellapsed)
