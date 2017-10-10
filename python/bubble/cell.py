@@ -21,7 +21,7 @@ class Cell:
         self.position = grid_cell_position(x, y)
         self.canvas.coords(self.square, *cell_box(self.position))
 
-        if self.bubble is not None:
+        if self.has_bubble():
             self.bubble.set_position(self.position)
 
     def get_position(self):
@@ -31,7 +31,7 @@ class Cell:
         return self.bubble
 
     def get_bubble_color(self):
-        if self.bubble is not None:
+        if self.has_bubble():
             return self.bubble.get_color()
 
     def set_bubble(self, bubble):
@@ -39,6 +39,9 @@ class Cell:
             bubble.set_position(self.position)
 
         self.bubble = bubble
+
+    def has_bubble(self):
+        return self.bubble is not None
 
     def get_adjacent(self, cells):
         return cell_adjacent_cells(cells, self.x, self.y)
