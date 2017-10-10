@@ -1,3 +1,4 @@
+from constants import DEBUG
 from calculations import cell_box, cell_adjacent_cells, grid_cell_position
 
 
@@ -9,8 +10,10 @@ class Cell:
         self.y = y
         self.position = grid_cell_position(x, y)
         self.bubble = None
-        self.square = canvas.create_rectangle(*cell_box(self.position))
-        canvas.create_text(self.position, text=str(', '.join(map(str, [x, y]))))
+
+        if DEBUG:
+            self.square = canvas.create_rectangle(*cell_box(self.position))
+            canvas.create_text(self.position, text=str(', '.join(map(str, [x, y]))))
 
     def get_place(self):
         return self.x, self.y
@@ -19,7 +22,9 @@ class Cell:
         self.x = x
         self.y = y
         self.position = grid_cell_position(x, y)
-        self.canvas.coords(self.square, *cell_box(self.position))
+
+        if DEBUG:
+            self.canvas.coords(self.square, *cell_box(self.position))
 
         if self.has_bubble():
             self.bubble.set_position(self.position)
