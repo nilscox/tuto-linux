@@ -65,6 +65,9 @@ class Grid:
             for j in range(len(self.cells[0])):
                 self.cells[i][j].set_place(j, i)
 
+    def get_last_line(self):
+        return self.cells[len(self.cells) - 1]
+
     def update(self, ellapsed):
         if self.bubble is not None:
             self.bubble.update(ellapsed)

@@ -1,6 +1,6 @@
 from random import choice
 from calculations import bubble_box
-from constants import BUBBLE_COLORS
+from constants import BUBBLE_COLORS, BUBBLE_SPEED
 
 
 class Bubble:
@@ -32,7 +32,7 @@ class Bubble:
     def move(self, direction):
         dx, dy = direction
         x, y = self.position
-        self.set_position((x + dx * self.speed, y + dy * self.speed))
+        self.set_position((x + dx * BUBBLE_SPEED, y + dy * BUBBLE_SPEED))
 
     def die(self):
         self.canvas.delete(self.circle)

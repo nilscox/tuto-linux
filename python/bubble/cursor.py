@@ -20,9 +20,15 @@ class Cursor:
         canvas.bind('<Button-1>', self.on_click)
 
         events.subscribe('attach', self.on_bubble_attach)
+        events.subscribe('lost', self.on_lost)
 
     def on_bubble_attach(self, cell, bubble):
         self.can_fire = True
+
+    def on_lost(self):
+        self.canvas.delete(self.next_bubble)
+        self.next_bubble = None
+        self.can_fire = False
 
     def fire(self, direction):
         if not self.can_fire:
