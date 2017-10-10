@@ -130,3 +130,15 @@ def grid_collision(cells, bubble):
 def grid_cell_position(x, y):
     offset = CELL_SIZE / 2 if y % 2 else 0
     return CELL_SIZE + CELL_SIZE * x + offset, CELL_SIZE + CELL_SIZE * y
+
+
+def panel_center():
+    return CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2
+
+
+def panel_box():
+    cx, cy = panel_center()
+    width, height = PANEL_SIZE
+    hwidth, hheight = width / 2, height / 2
+
+    return cx - hwidth, cy - hheight, cx + hwidth, cy + hheight
