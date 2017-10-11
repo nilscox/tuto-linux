@@ -48,5 +48,8 @@ class Cell:
     def has_bubble(self):
         return self.bubble is not None
 
+    def can_fall(self):
+        return not self.y == 0
+
     def get_adjacent(self, cells):
         return cell_adjacent_cells(cells, self.x, self.y)

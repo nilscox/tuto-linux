@@ -32,9 +32,13 @@ class Game:
 
         if diff >= GRID_LINE_SPAWN_TIME:
             self.grid.spawn_line()
+            self.grid.detach_isolated_bubbles()
             self.last_line_spawn = now
 
         self.grid.update(ellapsed)
+
+        for bubble in self.grid.get_falling_bubbles():
+            bubble.update(ellapsed)
 
         if self.has_lost():
             self.lost = True
