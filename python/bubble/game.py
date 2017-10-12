@@ -15,6 +15,14 @@ class Game:
         self.grid = Grid(canvas)
         self.last_line_spawn = time()
         self.lost = False
+        self.score = 0
+        self.score_text = canvas.create_text(30, 40, text=str(self.score), fill="white", font=("Courier", 36, "bold"))
+
+        events.subscribe('pop', self.on_bubbles_pop)
+
+    def on_bubbles_pop(self, bubbles):
+        self.score += 1
+        self.canvas.itemconfig(self.score_text, text=str(self.score))
 
     def has_lost(self):
         for cell in self.grid.get_last_line():

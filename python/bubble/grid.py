@@ -58,9 +58,15 @@ class Grid:
         cells = check_color(cell, [])
 
         if len(cells) >= CELLS_TOUCHING_THRESHOLD:
+            bubbles = []
+
             for cell in cells:
-                cell.get_bubble().die()
+                bubble = cell.get_bubble()
+                bubble.die()
                 cell.set_bubble(None)
+                bubbles.append(bubble)
+
+            events.publish('pop', bubbles)
 
     def detach_isolated_bubbles(self, *args, **kwargs):
 
@@ -88,6 +94,7 @@ class Grid:
         for line in self.cells:
             for cell in line:
                 if cell.has_bubble() and check_isolated_bubble(cell):
+                    bubble = cell.get_bubble()
                     detach_isolated_bubble(cell)
 
     def spawn_line(self):
