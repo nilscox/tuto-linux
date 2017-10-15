@@ -1,3 +1,5 @@
+from constants import DEBUG
+
 handlers = {}
 
 
@@ -8,7 +10,8 @@ def subscribe(event, func):
 
 
 def publish(event, *args, **kwargs):
-    print(event)
+    if DEBUG:
+        print(event, '[' + ', '.join(map(str, args)) + ']', kwargs)
 
     if handlers.get(event) is None:
         return

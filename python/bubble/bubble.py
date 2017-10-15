@@ -14,6 +14,14 @@ class Bubble:
         self.color = choice(BUBBLE_COLORS)
         self.circle = canvas.create_oval(*bubble_box(self.position), fill=self.color, width=0)
 
+    def __str__(self):
+        s = self.color + " Bubble at " + str(self.position)
+
+        if self.direction is not None:
+            s += " towards " + str(self.direction)
+
+        return s
+
     def get_color(self):
         return self.color
 
