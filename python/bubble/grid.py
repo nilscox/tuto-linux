@@ -91,11 +91,16 @@ class Grid:
             cell.set_bubble(None)
             self.falling_bubbles.append(bubble)
 
+        detached_bubbles = []
+
         for line in self.cells:
             for cell in line:
                 if cell.has_bubble() and check_isolated_bubble(cell):
-                    bubble = cell.get_bubble()
+                    detached_bubbles.append(cell.get_bubble())
                     detach_isolated_bubble(cell)
+
+        if len(detached_bubbles) >= 1:
+            events.publish('detach', detached_bubbles)
 
     def spawn_line(self):
         self.cells.pop()
