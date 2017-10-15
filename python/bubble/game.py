@@ -17,8 +17,10 @@ class Game:
         self.last_line_spawn = time()
         self.lost = False
         self.score = 0
-        self.score_manager = ScoreManager(self.win_points)
+        self.score_manager = ScoreManager()
         self.score_text = canvas.create_text(30, 40, text=str(self.score), fill="white", font=("Courier", 36, "bold"))
+
+        events.subscribe('win_points', self.win_points)
 
     def win_points(self, points):
         self.score += points
@@ -42,6 +44,7 @@ class Game:
             self.grid.spawn_line()
             self.grid.detach_isolated_bubbles()
             self.last_line_spawn = now
+            self.canvas.tag_raise(self.score_text)
 
         self.grid.update(ellapsed)
 
