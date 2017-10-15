@@ -9,4 +9,4 @@ class ScoreManager:
         events.subscribe('pop', self.on_pop)
 
     def on_pop(self, bubbles):
-        self.win_callback(1)
+        self.win_callback(len(bubbles))
