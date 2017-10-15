@@ -1,6 +1,7 @@
 from random import choice
 from calculations import bubble_box
-from constants import BUBBLE_COLORS, BUBBLE_SPEED
+from constants import BUBBLE_COLORS, BUBBLE_SPEED, CELL_SIZE, GRID_COLS
+import events
 
 
 class Bubble:
@@ -32,7 +33,16 @@ class Bubble:
     def move(self, direction):
         dx, dy = direction
         x, y = self.position
-        self.set_position((x + dx * BUBBLE_SPEED, y + dy * BUBBLE_SPEED))
+        x, y = x + dx * BUBBLE_SPEED, y + dy * BUBBLE_SPEED
+        minx, maxx = CELL_SIZE, GRID_COLS * (CELL_SIZE + 1)
+
+        if x < minx or x > maxx:
+            dx, dy = self.direction
+            self.set_direction((-dx, dy))
+            x = minx if x <= minx else maxx
+            events.publish('bounce', self)
+
+        self.set_position((x, y))
 
     def die(self):
         self.canvas.delete(self.circle)

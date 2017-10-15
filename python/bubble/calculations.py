@@ -90,19 +90,15 @@ def grid_collision(cells, bubble):
 
         return cell
 
-    def grid_collision_walls():
+    def grid_collision_top():
         first = cells[0][0]
-        last = cells[GRID_LINES - 1][GRID_COLS - 1]
         hsize = CELL_SIZE / 2
         bx0, by0, bx1, by1 = bubble_box(bubble.get_position())
 
         x0, y0 = first.get_position()
-        x0, y0 = x0 - hsize, y0 - hsize
+        y0 = y0 - hsize
 
-        x1, y1 = last.get_position()
-        x1 += hsize
-
-        return bx0 < x0 or by0 < y0 or bx1 > x1
+        return by0 < y0
 
     def grid_collision_cells():
 
@@ -123,7 +119,7 @@ def grid_collision(cells, bubble):
 
         return False
 
-    if grid_collision_walls() or grid_collision_cells():
+    if grid_collision_top() or grid_collision_cells():
         return get_closest_cell()
 
 
