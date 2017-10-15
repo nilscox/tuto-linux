@@ -5,6 +5,7 @@ from constants import GRID_LINE_SPAWN_TIME
 from cursor import Cursor
 from grid import Grid
 from panel import Panel
+from scoremanager import ScoreManager
 
 
 class Game:
@@ -16,12 +17,11 @@ class Game:
         self.last_line_spawn = time()
         self.lost = False
         self.score = 0
+        self.score_manager = ScoreManager(self.win_points)
         self.score_text = canvas.create_text(30, 40, text=str(self.score), fill="white", font=("Courier", 36, "bold"))
 
-        events.subscribe('pop', self.on_bubbles_pop)
-
-    def on_bubbles_pop(self, bubbles):
-        self.score += 1
+    def win_points(self, points):
+        self.score += points
         self.canvas.itemconfig(self.score_text, text=str(self.score))
 
     def has_lost(self):
