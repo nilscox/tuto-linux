@@ -1,7 +1,7 @@
 import events
 from bubble import Bubble
-from constants import CURSOR_POSITION
-from calculations import cursor_position, cursor_angle, cursor_fire_direction
+from constants import CURSOR_POSITION, CURSOR_BUBBLES_LOOKAHEAD
+from calculations import cursor_position, cursor_angle, cursor_fire_direction, cursor_bubble_position
 
 SIZE = 42
 
@@ -12,8 +12,12 @@ class Cursor:
         self.canvas = canvas
         self.position = CURSOR_POSITION
         self.angle = 0
-        self.next_bubble = Bubble(self.canvas, self.position)
+        self.next_bubbles = []
         self.can_fire = True
+
+        for i in range(CURSOR_BUBBLES_LOOKAHEAD):
+            bubble = Bubble(self.canvas, cursor_bubble_position(self.position, i))
+            self.next_bubbles.append(bubble)
 
         self.line = canvas.create_line(*cursor_position(self.angle), width=4)
         canvas.bind('<Motion>', self.on_mousemove)
@@ -26,17 +30,18 @@ class Cursor:
         self.can_fire = True
 
     def on_lost(self):
-        self.canvas.delete(self.next_bubble)
-        self.next_bubble = None
         self.can_fire = False
 
     def fire(self, direction):
         if not self.can_fire:
             return
 
-        bubble = self.next_bubble
-        self.next_bubble = Bubble(self.canvas, self.position)
+        bubble = self.next_bubbles.pop(0)
+        self.next_bubbles.append(Bubble(self.canvas, self.position))
         self.can_fire = False
+
+        for i in range(CURSOR_BUBBLES_LOOKAHEAD):
+            self.next_bubbles[i].set_position(cursor_bubble_position(self.position, i))
 
         bubble.set_direction(direction)
         events.publish('fire', bubble)

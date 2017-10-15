@@ -23,6 +23,15 @@ def cursor_angle(direction):
     return atan(dx / dy)
 
 
+def cursor_bubble_position(cursor_position, n):
+    x, y = cursor_position
+
+    if n == 0:
+        return x, y
+
+    return x + (n - 1 / 2) * 2 * BUBBLE_RADIUS, y + 2 * BUBBLE_RADIUS
+
+
 def bubble_box(position):
     x, y = position
 
