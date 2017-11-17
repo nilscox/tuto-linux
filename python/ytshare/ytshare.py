@@ -1,17 +1,19 @@
 import sys
 
 
-def file():
+tab = sys.argv
+url = sys.argv[1]
+
+
+def save_url(url):
     p = open('playlist.txt', 'a')
-    p.write(sys.argv[1] + "\n")
+    p.write(url + "\n")
     p.close()
 
 
-tab = sys.argv
-
 if len(tab) == 2:
-    file()
+    save_url(url)
 else:
-    print("usage: ytshare.py <youtube-url>")
+    print("usage:", tab[0], "<youtube-url>")
 
 
