@@ -1,14 +1,17 @@
 import sys
 
-p = open('playlist.txt', 'a')
+
+def file():
+    p = open('playlist.txt', 'a')
+    p.write(sys.argv[1] + "\n")
+    p.close()
+
+
 tab = sys.argv
 
-
 if len(tab) == 2:
-    p.write(sys.argv[1] + "\n")
-elif len(tab) == 1:
-    print("You must paste one youtube link.")
+    file()
 else:
-    print("You can only paste one link at a time.")
+    print("usage: ytshare.py <youtube-url>")
 
-p.close()
+
