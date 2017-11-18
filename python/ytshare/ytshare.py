@@ -1,4 +1,7 @@
+#!/usr/bin/python3
+
 import sys
+import re
 
 
 def save_url(url):
@@ -7,13 +10,17 @@ def save_url(url):
     p.close()
 
 
+def is_youtube_url(url):
+    regex = re.compile("(https?://)?(www.)?youtube.com/watch\?v=.*")
+    return regex.match(url)
+
+
 def main():
 
     tab = sys.argv
-    url = tab[1]
 
-    if len(tab) == 2:
-        save_url(url)
+    if len(tab) == 2 and is_youtube_url(tab[1]):
+        save_url(tab[1])
     else:
         print("usage:", tab[0], "<youtube-url>")
         sys.exit(1)
