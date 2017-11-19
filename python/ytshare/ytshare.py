@@ -13,11 +13,11 @@ def get_youtube_id(url):
     if match:
         return match.group(3)
 
-    match = re.match("(https?://)?(www.)?youtube.be/(.*)", url)
+    match = re.match("(https?://)?(www.)?youtu.be/(.*)", url)
     if match:
         return match.group(3)
 
-    match = re.match("(https?://)?(www)?youtube.com/embed/(.*)", url)
+    match = re.match("(https?://)?(www.)?youtube.com/embed/(.*)", url)
     if match:
         return match.group(3)
 
