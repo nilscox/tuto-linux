@@ -34,9 +34,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         return self.handle_request(get_html)
 
 class MyTCPServer(socketserver.TCPServer):
-    def __init__(self, host, ip):
-        socketserver.TCPServer.__init__(self, host, ip)
+    def __init__(self, host, port):
+        socketserver.TCPServer.__init__(self, host, port)
         self.allow_reuse_address = True
+
 
 with MyTCPServer(("", PORT), Handler) as httpd:
     print("serving at port", PORT)
