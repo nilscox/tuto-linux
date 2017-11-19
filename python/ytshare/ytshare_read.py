@@ -2,9 +2,9 @@ import sys
 import os
 
 
-def read_urls():
+def read_ids():
 
-    urls = []
+    ids = []
 
     if not os.path.isfile('playlist.txt'):
         return []
@@ -13,10 +13,10 @@ def read_urls():
         p = open('playlist.txt', "r")
         line = p.readline()
         while line:
-            urls.append(line[:-1])
+            ids.append(line[:-1])
             line = p.readline()
 
-        return urls
+        return ids
 
 
 def get_html():
@@ -27,10 +27,10 @@ def get_html():
     html += '</head>'
     html += '<body>'
 
-    for url in read_urls():
+    for id in read_ids():
         html += '<p>'
-        html += '<iframe width="560" height="315" src="'
-        html += url
+        html += '<iframe width="560" height="315" src="https://www.youtube.com/embed/'
+        html += id
         html += '" frameborder="0" gesture="media" allowfullscreen></iframe>'
         html += '</p>'
 
