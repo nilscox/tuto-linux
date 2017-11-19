@@ -1,29 +1,39 @@
-#!/usr/bin/python3
-
 import sys
 import re
 
 
-def save_url(url):
+def save_youtube_id(youtube_id):
     p = open('playlist.txt', 'a')
-    p.write(url + "\n")
+    p.write(youtube_id + "\n")
     p.close()
 
 
-def is_youtube_url(url):
-    regex = re.compile("(https?://)?(www.)?youtube.com/watch\?v=.*")
-    return regex.match(url)
+def get_youtube_id(url):
+    match = re.match("(https?://)?(www.)?youtube.com/watch\?v=(.*)", url)
+    if match:
+        return match.group(3)
+
+    match = re.match("(https?://)?(www.)?youtube.be/(.*)", url)
+    if match:
+        return match.group(3)
+
+    match = re.match("(https?://)?(www)?youtube.com/embed/(.*)", url)
+    if match:
+        return match.group(3)
+
+
+def usage():
+    print("usage:", sys.argv[0], "<youtube-url>")
+    sys.exit(1)
 
 
 def main():
 
-    tab = sys.argv
+    if len(sys.argv) != 2:
+        usage()
 
-    if len(tab) == 2 and is_youtube_url(tab[1]):
-        save_url(tab[1])
-    else:
-        print("usage:", tab[0], "<youtube-url>")
-        sys.exit(1)
+    youtube_id = get_youtube_id(sys.argv[1])
+    save_youtube_id(youtube_id)
 
 
 if __name__ == '__main__':
