@@ -4,9 +4,14 @@ import sys
 import re
 
 
+def embed_url(url):
+    url.replace("watch?v=", "embed/")
+    return str(url.replace("watch?v=", "embed/"))
+
+
 def save_url(url):
     p = open('playlist.txt', 'a')
-    p.write(url + "\n")
+    p.write(embed_url(url) + "\n")
     p.close()
 
 
