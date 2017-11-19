@@ -13,6 +13,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(get_html().encode())
 
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
+
+class MyTCPServer(socketserver.TCPServer):
+    def __init__(self, host, ip):
+        socketserver.TCPServer.__init__(self, host, ip)
+        self.allow_reuse_address = True
+
+with MyTCPServer(("", PORT), Handler) as httpd:
     print("serving at port", PORT)
     httpd.serve_forever()
