@@ -13,7 +13,7 @@ def read_urls():
         p = open('playlist.txt', "r")
         line = p.readline()
         while line:
-            urls.append(line)
+            urls.append(line[:-1])
             line = p.readline()
 
         return urls
@@ -30,7 +30,7 @@ def get_html():
     for url in read_urls():
         html += '<p>'
         html += '<iframe width="560" height="315" src="'
-        html += url[:-1]
+        html += url
         html += '" frameborder="0" gesture="media" allowfullscreen></iframe>'
         html += '</p>'
 
