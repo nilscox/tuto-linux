@@ -1,11 +1,14 @@
 import sys
 import re
+from urllib.request import Request, urlopen
 
 
 def save_youtube_id(youtube_id):
     p = open('playlist.txt', 'a')
     p.write(youtube_id + "\n")
     p.close()
+
+    return '<html><body></body></html>'
 
 
 def get_youtube_id(url):
@@ -33,7 +36,8 @@ def main():
         usage()
 
     youtube_id = get_youtube_id(sys.argv[1])
-    save_youtube_id(youtube_id)
+    req = Request('http://localhost:4269/', data=youtube_id.encode())
+    urlopen(req)
 
 
 if __name__ == '__main__':
