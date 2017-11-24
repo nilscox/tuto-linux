@@ -1,5 +1,6 @@
 import sys
 import os
+import re
 
 
 def rot13(letter):
@@ -27,6 +28,19 @@ def rot13(letter):
             return new_letter
     else:
         return letter
+
+
+def create_new_file(old_file):
+
+    match = re.match("((.+)\.rot13)", old_file)
+    if not match:
+        new_file = old_file + '.rot13'
+        file = open(new_file, 'w')
+        file.close()
+    else:
+        new_file = old_file[0:-6]
+        file = open(new_file, 'w')
+        file.close()
 
 
 def main():
