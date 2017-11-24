@@ -49,11 +49,13 @@ def main():
         sys.exit(1)
 
     if os.path.isfile(sys.argv[1]):
-        existing_file = input(sys.argv[1] + "already exist. Do you want to erase it ? (ny) ")
+        existing_file = input('This is already an existing file. Do you want to erase it ? (ny) ')
         if existing_file == 'n':
             sys.exit(1)
         elif existing_file == 'y':
             create_new_file(sys.argv[1])
+    
+    create_new_file(sys.argv[1])
 
 
 if __name__ == '__main__':
