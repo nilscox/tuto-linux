@@ -1,3 +1,7 @@
+import sys
+import os
+
+
 def rot13(letter):
 
     up_a = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -23,3 +27,14 @@ def rot13(letter):
             return new_letter
     else:
         return letter
+
+
+def main():
+
+    if len(sys.argv) != 2 or not os.path.isfile(sys.argv[1]):
+        print('usage: ', sys.argv[0], ' <file_name>')
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
