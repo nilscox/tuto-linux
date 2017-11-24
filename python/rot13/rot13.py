@@ -35,12 +35,11 @@ def create_new_file(old_file):
     match = re.match("((.+)\.rot13)", old_file)
     if not match:
         new_file = old_file + '.rot13'
-        file = open(new_file, 'w')
-        file.close()
+        return open(new_file, 'w')
+
     else:
         new_file = old_file[0:-6]
-        file = open(new_file, 'w')
-        file.close()
+        return open(new_file, 'w')
 
 
 def main():
@@ -48,6 +47,13 @@ def main():
     if len(sys.argv) != 2 or not os.path.isfile(sys.argv[1]):
         print('usage: ', sys.argv[0], ' <file_name>')
         sys.exit(1)
+
+    if os.path.isfile(sys.argv[1]):
+        existing_file = input(sys.argv[1] + "already exist. Do you want to erase it ? (ny) ")
+        if existing_file == 'n':
+            sys.exit(1)
+        elif existing_file == 'y':
+            create_new_file(sys.argv[1])
 
 
 if __name__ == '__main__':
