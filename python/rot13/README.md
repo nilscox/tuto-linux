@@ -88,3 +88,30 @@ rot13.py  tata.txt  tata.txt.rot13  toto.txt  toto.txt.rot13
 J'aime les vaches
 J'4IM3 L3$ V4CH3$
 ```
+
+## Hints
+
+Fonctions utilisées :
+
+- `print`
+- `input`
+- `sys.exit`
+- `open`
+- `ord`
+- `chr`
+- `file.read`
+- `file.write`
+- `os.path.isfile`
+- `string.isalpha`
+- `string.isupper`
+- `string.endswith`
+
+Fonctions écrites :
+
+- `rot13(str) -> str`
+- `read_file(str) -> str`
+- `write_file(str, text) -> str`
+- `get_output_filename(str) -> str`
+- `check_overwrite(str) -> Bool`
+- `usage() -> None`
+- `main() -> None`
