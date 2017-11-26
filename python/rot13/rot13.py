@@ -42,20 +42,37 @@ def create_new_file(old_file):
         return open(new_file, 'w')
 
 
+def crypt_file(old_file, file):
+
+    old_letters = []
+    old_file = open(sys.argv[1], 'r')
+
+    for l in old_file.read():
+        old_letters.append(l)
+
+    old_file.close()
+    file = create_new_file(sys.argv[1])
+
+    for letter in old_letters:
+        file.write(rot13(letter))
+
+    file.close()
+
+
 def main():
 
     if len(sys.argv) != 2 or not os.path.isfile(sys.argv[1]):
         print('usage: ', sys.argv[0], ' <file_name>')
         sys.exit(1)
 
-    if os.path.isfile(sys.argv[1]):
-        existing_file = input('This is already an existing file. Do you want to erase it ? (ny) ')
+    if os.path.isfile(sys.argv[1] + '.rot13') or os.path.isfile(sys.argv[1][0:-6]):
+        existing_file = input(sys.argv[1] + ' already have a crypted version. Do you want to erase it? (ny) ')
         if existing_file == 'n':
             sys.exit(1)
         elif existing_file == 'y':
-            create_new_file(sys.argv[1])
-    
-    create_new_file(sys.argv[1])
+            crypt_file(sys.argv[1], create_new_file(sys.argv[1]))
+
+    crypt_file(sys.argv[1], create_new_file(sys.argv[1]))
 
 
 if __name__ == '__main__':
