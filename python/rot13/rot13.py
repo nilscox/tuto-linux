@@ -1,27 +1,25 @@
 import sys
 import os
-import re
 
 
 def rot13(letter):
     if not ('A' <= letter <= 'Z' or 'a' <= letter <= 'z'):
         return letter
+    if letter.isupper():
+        x = ord('A')
+        letter_place = ord(letter) - x
     else:
-        if letter.isupper():
-            letter_place = ord(letter) - ord('A')
-            new_letter_place = (letter_place + 13) % 26
-            return chr(new_letter_place + ord('A'))
-        else:
-            letter_place = ord(letter) - ord('a')
-            new_letter_place = (letter_place + 13) % 26
-            return chr(new_letter_place + ord('a'))
+        x = ord('a')
+        letter_place = ord(letter) - x
+
+    new_letter_place = (letter_place + 13) % 26
+    return chr(new_letter_place + x)
 
 
 def get_new_file_name(old_file_name):
-    match = re.match(r"((.+)\.rot13)", old_file_name)
-    if not match:
+    if old_file_name.endswith('.txt'):
         return old_file_name + '.rot13'
-    else:
+    elif old_file_name.endswith('.rot13'):
         return old_file_name[0:-6]
 
 
@@ -53,7 +51,7 @@ def usage():
 def check_overwrite(file_name):
     if os.path.isfile(file_name):
         erase = input(file_name + ' already exist. Do you want to erase it? (ny) ')
-        if erase == 'n':
+        if erase == 'n' or erase == 'N':
             sys.exit(1)
 
 
