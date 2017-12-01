@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import sys
 import re
 from urllib.request import Request, urlopen
