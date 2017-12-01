@@ -36,7 +36,7 @@ def main():
         usage()
 
     youtube_id = get_youtube_id(sys.argv[1])
-    req = Request('http://localhost:4269/', data=youtube_id.encode())
+    req = Request('http://37.187.126.3:4269/', data=youtube_id.encode())
     urlopen(req)
 
 
