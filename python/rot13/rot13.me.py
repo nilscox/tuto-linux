@@ -4,7 +4,7 @@ import os
 
 def rot13(text):
     def rot13chr(c):
-        if not ("a" < c < "z" or "A" < c < "Z"):
+        if not ("a" <= c <= "z" or "A" <= c <= "Z"):
             return c
 
         offset = ord("A" if c.isupper() else "a")
