@@ -1,10 +1,8 @@
 def in_dict(str):
-    a = str.replace('=', '+')
-    list = a.split('+')
-    dict = {}
+    a = str.split('+')
+    b = {}
+    for i in a:
+        c = i.split('=')
+        b[c[0]] = c[1]
 
-    for i in list[::2]:
-        j = list.index(i) + 1
-        dict[i] = list[j]
-
-    return dict
+    return b
