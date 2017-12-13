@@ -1,7 +1,15 @@
+import linecache
+import sys
+
 from exos import *
 
 def a(f, args, expected):
-    actual = f(*args)
+    try:
+        actual = f(*args)
+    except Exception as e:
+        print('[\033[31mKO\033[0m] ' + f.__name__ + '(' + ', '.join(map(str, args)) + ')')
+        print('Error: ' + str(e))
+        return
     if actual != expected:
         print('[\033[31mKO\033[0m] ' + f.__name__ + '(' + ', '.join(map(str, args)) + ')')
         print('expected: ' + str(expected))
