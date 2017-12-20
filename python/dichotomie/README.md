@@ -16,5 +16,8 @@ sont égaux, bin... on l'a trouvé.
 ## Prototype
 
 ```
-dichotomie(list, elem) -> int
+dichotomy(list, elem) -> int
 ```
+
+`liste` sera toujours composé d'éléments comparables, et `elem` sera toujours
+un élément comparable avec ceux qui composent la liste.
