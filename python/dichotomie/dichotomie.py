@@ -2,7 +2,7 @@ def dich(list, elem):
     if len(list) == 0:
         return None
 
-    if elem > list[-1]:
+    if elem > list[-1] or elem < list[0]:
         return None
 
     if len(list) == 1:
@@ -16,8 +16,10 @@ def dich(list, elem):
             return x
         elif list[z] > elem:
             z //= 2
-        elif list[z] < elem:
+        elif list[x] < elem:
             x += 1
+        else:
+            return None
 
     return z
 
@@ -42,6 +44,7 @@ if __name__ == '__main__':
     verif([0, 1], 0)
     verif([0, 1], 1)
     verif([0, 1], 2)
+    verif([2, 3], 0)
     verif([0, 1, 2], 0)
     verif([0, 1, 2], 1)
     verif([0, 1, 2], 2)
